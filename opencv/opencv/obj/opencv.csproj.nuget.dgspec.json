@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pinaka\\source\\repos\\opencv\\opencv\\opencv.csproj": {}
+    "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\opencv.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pinaka\\source\\repos\\opencv\\opencv\\opencv.csproj": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\opencv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pinaka\\source\\repos\\opencv\\opencv\\opencv.csproj",
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\opencv.csproj",
         "projectName": "opencv",
-        "projectPath": "C:\\Users\\Pinaka\\source\\repos\\opencv\\opencv\\opencv.csproj",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\opencv.csproj",
         "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pinaka\\source\\repos\\opencv\\opencv\\obj\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",

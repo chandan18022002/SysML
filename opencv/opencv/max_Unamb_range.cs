@@ -96,11 +96,11 @@ class max_Unamb_range
                 {
                     double time_diff = tick-initial_time;
                     double pul_vel = 0;
-                    if (pulse.velocity.X> 0){
-                        pul_vel = pulse.velocity.X;
+                    if (pulse.Velocity.X> 0){
+                        pul_vel = pulse.Velocity.X;
                     }
                     else {
-                        pul_vel= -pulse.velocity.X;
+                        pul_vel= -pulse.Velocity.X;
                     }
                     double distance = (pul_vel * time_diff) / 2;     // c is the pulse velocity
 

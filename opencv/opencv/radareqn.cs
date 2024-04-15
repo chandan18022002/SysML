@@ -21,19 +21,22 @@ class radareqn
 
         // radAR BASE class initialsization
 
-        RadarBase radarbase = new RadarBase("27", new Vector(100, 400), 56, 89, [], []);
+        RadarBase radarbase = new RadarBase("0", new Vector(100, 300), 0, 0, [], []);
+     
 
         //radAR  class initialsization
-        Radar radar = new Radar("2", radarbase, "sat", "ant", "mod", 0, 0, 1.5, 1000, 50, "asp");
+        Radar radar = new Radar("0", radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 500, 1.5, "antenna_scan_pattern",100,200,1,1,100);
         radarbase.OnboardSensor.Add(radar);// assigning the onboardsensor to a radar
         radarbaselist.Add(radarbase);
 
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft("5", new Vector(100, 400), 56, 89, [], []);
+        Aircraft aircraft = new Aircraft("0", new Vector(500, 300), 0, 0, [], []);
         aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
 
 
         int tick = 0;
+        int current_pulse_id = 0;
+        int latest_radar_transmission_tick = 0;
         int pul_index = 0;
         while (true)
         {
@@ -95,13 +98,13 @@ class radareqn
                 {
                     double time_diff = tick - initial_time;
                     double pul_vel = 0;
-                    if (pulse.velocity.X > 0)
+                    if (pulse.Velocity.X > 0)
                     {
-                        pul_vel = pulse.velocity.X;
+                        pul_vel = pulse.Velocity.X;
                     }
                     else
                     {
-                        pul_vel = -pulse.velocity.X;
+                        pul_vel = -pulse.Velocity.X;
                     }
                     double distance = (pul_vel * time_diff) / 2;     // c is the pulse velocity
 
@@ -160,6 +163,15 @@ class radareqn
     static double DegreesToRadians(double degrees)
     {
         return degrees * (Math.PI / 180);
+    }
+    static double Magnitude(double[] vector)
+    {
+        double sumOfSquares = 0.0;
+        foreach (double component in vector)
+        {
+            sumOfSquares += Math.Pow(component, 2);
+        }
+        return Math.Sqrt(sumOfSquares);
     }
 
 }

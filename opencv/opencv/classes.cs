@@ -146,12 +146,19 @@ public class Radar : Sensor
     public double Azimuth;
     public double Frequency;
     public int Pri; // Pulse Repetition Interval
-    public int Pwd; // Pulse Width Duration
+    public double Pwd; // Pulse Width Duration
     public string AntennaScanPattern;
     public List<object> Detected;
-    public List<List<double>> Gain_table;
+    public int Detection_Range;
+    public int Detectability_Range ;
+    public int Resolution_Cell ;
+    public int Minimum_Range; 
+    public int Max_Unambiguous_Range; 
 
-    public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, int pwd, string antennaScanPattern/*, List<List<double>> gain_table*/) : base(id, platform)
+    public List<List<double>> Gain_table;
+    private int resolution_cell;
+
+    public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, int detection_range,int detectability_range,int resenution_cell, int minimum_range,int  max_unamb_range/*, List<List<double>> gain_table*/) : base(id, platform)
     {
 
         OperatingMode = operatingMode;
@@ -164,7 +171,12 @@ public class Radar : Sensor
         Pwd = pwd;
         AntennaScanPattern = antennaScanPattern;
         Detected = new List<object>();
-        Gain_table = CreateGainTable();
+        Detection_Range = detection_range;
+        Detectability_Range = detectability_range;
+        Resolution_Cell = resolution_cell;
+        Minimum_Range = minimum_range;
+        Max_Unambiguous_Range = max_unamb_range;
+     Gain_table = CreateGainTable();
 
     }
 
@@ -213,10 +225,11 @@ public class Pulsed_radar : Radar
 {
     public string id;
     public int Pri; // Pulse Repetition Interval
-    public int Pwd;
+    public double Pwd;
     public int prf;
-    public Pulsed_radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, int pwd, string antennaScanPattern/* List<List<double>> Gain_table*/) : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern /*Gain_table*/)
-
+    // public Pulsed_radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, int pwd, string antennaScanPattern/* List<List<double>> Gain_table*/) : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern /*Gain_table*/)
+    public Pulsed_radar (string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, int detection_range, int detectability_range, int resolution_cell, int minimum_range, int max_unamb_range) : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
+    
     {
         Pri = pri; // Pulse Repetition Interval
         Pwd = pwd;
@@ -241,15 +254,13 @@ public class Pulsed_radar : Radar
 }
 public class Continous_wave : Radar
 {
-    public double transmitted_frequency;
-    public double Received_frequency;
-
-    public Continous_wave(string id, Platform platform, double transmitted_frequency, double Received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, int pwd, string antennaScanPattern/* List<List<double>> Gain_table*/) : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern/* Gain_table*/)
-
+    public double TransmittedFrequency;
+    public double ReceivedFrequency;
+    public Continous_wave(string id, Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, int detection_range, int detectability_range, int resolution_cell, int minimum_range, int max_unamb_range)
+          : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
-        transmitted_frequency = transmitted_frequency; // Pulse Repetition Interval
-        Received_frequency = Received_frequency;
-
+        TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
+        ReceivedFrequency = received_frequency; // Initialize Received Frequency
     }
     public override void Set(string id)
     {
@@ -272,12 +283,11 @@ public class Continous_wave : Radar
 public class Pulse_Doppler : Radar
 {
 
-    public Pulse_Doppler(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, int pwd, string antennaScanPattern /*List<List<double>> Gain_table*/) : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern/*, Gain_table*/)
-
-    {
+    public Pulse_Doppler(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern,int  detection_range,int detectability_range,int resolution_cell, int minimum_range,int  max_unamb_range) /*List<List<double>> Gain_table*/ : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
+    { 
 
     }
-    public override void Set(string id)
+public override void Set(string id)
     {
         Id = id;
     }
@@ -351,7 +361,7 @@ public class Pulse
 {
     public int Id;
     public Vector Position;
-    public Vector velocity;
+    public Vector Velocity;
     public double energy;
     public string source;
     public double pwd;
@@ -365,7 +375,7 @@ public class Pulse
     {
         Id = id;
         Position = position;
-        velocity = Velocity;
+        this.Velocity = Velocity;
         pwd = pwd;
         frequency = frequency;
         beam_width = beam_width;
@@ -373,13 +383,35 @@ public class Pulse
     }
     public void Move()
     {
-        Position.X += velocity.X;
-        Position.Y += velocity.Y;
+        Position.X += Velocity.X;
+        Position.Y += Velocity.Y;
     }
     public void reverse()
     {
-        velocity.X = -velocity.X;
-        velocity.Y = -velocity.Y;
+        Velocity.X = -Velocity.X;
+        Velocity.Y = -Velocity.Y;
+    }
+
+   public void colloid_radar(int tick,int latest_radar_transmission_tick)
+    {
+       double time_diff = latest_radar_transmission_tick - tick;
+        double Target_distance=Magnitude(Velocity)*time_diff/2;
+        Console.WriteLine(Target_distance);
+    }
+
+    private double Magnitude(Vector velocity)
+    {
+        throw new NotImplementedException();
+    }
+
+    static double Magnitude(double[] vector)
+    {
+        double sumOfSquares = 0.0;
+        foreach (double component in vector)
+        {
+            sumOfSquares += Math.Pow(component, 2);
+        }
+        return Math.Sqrt(sumOfSquares);
     }
 
 }
