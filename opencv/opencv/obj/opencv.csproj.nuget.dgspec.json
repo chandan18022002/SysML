@@ -11,7 +11,7 @@
         "projectName": "opencv",
         "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\opencv.csproj",
         "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\SysML\\opencv\\opencv\\obj\\",
+        "outputPath": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
