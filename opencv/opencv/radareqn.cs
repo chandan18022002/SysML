@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Data;
+using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using radar;         // here im using radar namespace of other ( claseses) file 
@@ -40,14 +41,62 @@ class radareqn
         int pul_index = 0;
         while (true)
         {
-            Mat image = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
-            image.SetTo(new Bgr(0, 0, 0).MCvScalar);
+            Mat image_virtual = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
+            image_virtual.SetTo(new Bgr(0, 0, 0).MCvScalar);
+
+            Mat image_actual = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
+            image_actual.SetTo(new Bgr(0, 0, 0).MCvScalar);
+
+            for (int i = pulse_dictionary.Count - 1; i >= 0; i--)
+            {
+                //Green Aircraft
+
+                CvInvoke.Circle(image_virtual, new Point((int)radarbaselist[i].Position.X, (int)radarbaselist[i].Position.Y), 3, new MCvScalar(pul_index, 0, 255), -1);
+                CvInvoke.Circle(image_actual, new Point((int)radarbaselist[i].Position.X, (int)radarbaselist[i].Position.Y), 3, new MCvScalar(pul_index, 0, 255), -1);
+
+                int currentKey = pulse_dictionary.Keys.ElementAt(i);
+                Pulse pulse = pulse_dictionary[currentKey];
+                pulse.Move();
+
+
+            }
 
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
+
+                Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraft.Position.X, (int)aircraft.Position.Y);
+
+                if (actual_pixelValue.Red == 255)
+                {
+                    pul_index = (int)actual_pixelValue.Blue;
+
+                    if (pulse_dictionary.ContainsKey(pul_index))
+                    {
+                        Pulse pulse = pulse_dictionary[pul_index];
+                        pulse.colloid_target(0);
+                    }
+                }
+
                 //Green Aircraft
-                CvInvoke.Circle(image, new Point((int)aircraftlist[i].Position.X + 500, (int)aircraftlist[i].Position.Y), 3, new MCvScalar(0, 255, 0), -1);
-            }                                                              
+                CvInvoke.Circle(image_actual, new Point((int)aircraftlist[i].Position.X + 100, (int)aircraftlist[i].Position.Y), 3, new MCvScalar(0, 255, 0), -1);
+            }                                                                //umambrange=c/(2f)  =>c is pulse velocity where pulsevelocity is vector quantity sotake magnitude of it (sqrt(velx square)+(vel.y square))   so we get only one value for range beacuse rngeis scalar quantity
+                                                                             //f is prf which is 1/pri   ==> 500/(2*0.001)==500
+
+            for (int i = radarbaselist.Count - 1; i >= 0; i--)
+            {
+                Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)radarbase.Position.X, (int)radarbase.Position.Y);
+
+                if (actual_pixelValue.Red == 255)
+
+                    pul_index = (int)actual_pixelValue.Blue;
+
+                if (pulse_dictionary.ContainsKey(pul_index))
+                {
+                    Pulse pulse = pulse_dictionary[pul_index];
+                    pulse.colloid_radar(tick, latest_radar_transmission_tick);
+                }
+                pulse_dictionary.Remove(i);
+            }
 
             static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
             {
@@ -55,10 +104,11 @@ class radareqn
             }
 
 
+
             for (int i = radarbaselist.Count - 1; i >= 0; i--)
             {
                 //Blue Radar
-                CvInvoke.Circle(image, new Point((int)radarbaselist[i].Position.X, (int)radarbaselist[i].Position.Y), 3, new MCvScalar(255, 0, 0), -1);
+                CvInvoke.Circle(image_actual, new Point((int)radarbaselist[i].Position.X, (int)radarbaselist[i].Position.Y), 3, new MCvScalar(255, 0, 0), -1);
 
                 if (tick % radar.Pri == 0)
                 //if (tick == 0)
@@ -70,11 +120,10 @@ class radareqn
                     double vel_y = Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
 
                     //creating pulse
-                    Pulse pulse = new Pulse(pul_index, new Vector(radarbaselist[i].Position.X + 4, radarbaselist[i].Position.Y), new Vector(vel_x, vel_y), 85, 75, 22, 58);//pulse position should be rdar position so it achieve by .x and .y individually 
+                    Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].Position.X, radarbaselist[i].Position.Y), new Vector(vel_x, vel_y), 85, 75, 22, 58,radar.Azimuth,radar.Frequency);//pulse position should be rdar position so it achieve by .x and .y individually 
                     initial_time = tick;
                     //// add that pulse in list of pulses
-                    pulse_dictionary.Add(pul_index, pulse);
-
+                    pulse_dictionary.Add(pul_index, value: pulse);
                 }
 
             }

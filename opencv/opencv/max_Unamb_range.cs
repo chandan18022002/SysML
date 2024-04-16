@@ -24,7 +24,7 @@ class max_Unamb_range
         RadarBase radarbase = new RadarBase("27", new Vector(100, 400), 56, 89, [], []);
 
         //radAR  class initialsization
-        Radar radar = new Radar("2",radarbase, "sat", "ant", "mod", 0, 0, 1.5, 1000, 50, "asp");
+        Radar radar = new Radar("0",radarbase, "sat", "ant", "none", 0, 0, 1.5,500,1.5,"asp",100.0,200.0,1.0,1.0,100.0);
         radarbase.OnboardSensor.Add(radar);// assigning the onboardsensor to a radar
         radarbaselist.Add(radarbase);
 
@@ -34,7 +34,12 @@ class max_Unamb_range
    
 
         int tick = 0;
-        int pul_index = 0;
+        int pul_index = 0;  
+        int latest_radar_transmit_tick = 0;
+        int current_pulse_id = 0;
+
+
+
         while (true)
         {
             Mat image = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
@@ -68,7 +73,7 @@ class max_Unamb_range
                     double vel_y = Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));         
             
                     //creating pulse
-                    Pulse pulse = new Pulse(pul_index,new Vector(radarbaselist[i].Position.X + 4, radarbaselist[i].Position.Y), new Vector(vel_x, vel_y),85,75,22,58);//pulse position should be rdar position so it achieve by .x and .y individually 
+                    Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].Position.X , radarbaselist[i].Position.Y), new Vector(vel_x, vel_y),85,75,22,58);//pulse position should be rdar position so it achieve by .x and .y individually 
                     initial_time = tick;
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, pulse);
