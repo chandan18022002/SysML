@@ -118,6 +118,7 @@ class radareqn
                     pul_index += 1;
                     double vel_x = Math.Cos(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
                     double vel_y = Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
+                  
 
                     //creating pulse
                     Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].Position.X, radarbaselist[i].Position.Y), new Vector(vel_x, vel_y), 85, 75, 22, 58,radar.Azimuth,radar.Frequency);//pulse position should be rdar position so it achieve by .x and .y individually 
@@ -213,7 +214,7 @@ class radareqn
     {
         return degrees * (Math.PI / 180);
     }
-    static double Magnitude(double[] vector)
+    static double Magnitude(double vel_x, double[] vector)
     {
         double sumOfSquares = 0.0;
         foreach (double component in vector)

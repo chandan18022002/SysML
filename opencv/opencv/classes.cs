@@ -4,6 +4,8 @@ using System;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Emgu.CV.Dnn;
 namespace radar;    // im giving this namespace name as radar
 
 public abstract class BattleSystem
@@ -26,7 +28,7 @@ public class Platform : BattleSystem
     public double Speed;
     public double Heading;
     public List<Waypoint> Waypoints;
-    public List<Sensor> OnboardSensor;
+    public static List<Sensor> OnboardSensor;
     public List<List<double>> RadarCrossSection;
 
     public Platform(string id, Vector position, double speed, double heading, List<Waypoint> waypoints, List<Sensor> OnBoardsensor) 
@@ -46,7 +48,7 @@ public class Platform : BattleSystem
         Console.WriteLine("Platform is moving!");
     }
 
-    private List<List<double>> CreateRadarCrossSection()
+    public List<List<double>> CreateRadarCrossSection()
     {
         List<List<double>> table = new List<List<double>>();
 
@@ -144,8 +146,8 @@ public class Radar : Sensor
     public string Antenna;
     public string Modulation;
     public double Elevation;
-    public double Azimuth;
-    public double Frequency;
+    public  static double Azimuth;
+    public  static double Frequency;
     public int Pri; // Pulse Repetition Interval
     public double Pwd; // Pulse Width Duration
     public string AntennaScanPattern;
@@ -225,17 +227,21 @@ public class Radar : Sensor
 
 public class Pulsed_radar : Radar
 {
-    public string id;
+  
     public int Pri; // Pulse Repetition Interval
     public double Pwd;
-    public int prf;
-    public Pulsed_radar (string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range) 
+    public double prf;
+    public double peak_transmission_power;
+
+    public Pulsed_radar (string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range,  double peak_transmission_power) 
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     
     {
         Pri = pri; // Pulse Repetition Interval
         Pwd = pwd;
         prf = prf;
+        peak_transmission_power = peak_transmission_power;
+
     }
     public override void Set(string id)
     {
@@ -365,91 +371,159 @@ public class RadarBase : Platform
 public class Pulse
 {
     public int Id;
-    public Vector Position;
-    public Vector Velocity;
-    public double energy;
+    public Vector position;
+    public Vector velocity;
+    public double energy = 0;
     public string source;
     public double pwd;
     public double frequency;
     public double beam_width;
     public double beam_width_vel;
-    public double Distance_travelled;
+    public double distance_travelled;
     public double elevation;
-    public double azimuth;
+    public static  double azimuth;
     
 
-    public Pulse(int id, Vector position, Vector Velocity, double pwd, double frequency, double beam_width, double beam_width_vel,double Distance_travelled, double elevation,double azimuth)
+    public Pulse(int id, Vector position, Vector velocity,double energy,string source, double pwd, double frequency, double beam_width, double beam_width_vel,double Distance_travelled, double elevation,double azimuth)
     {
         Id = id;
-        Position = position;
-        Velocity = Velocity;
+        position = position;
+        velocity = velocity;
+        energy = energy;
+        source = source;
         pwd = pwd;
         frequency = frequency;
         beam_width = beam_width;
-        Distance_travelled = Distance_travelled;
+        distance_travelled = distance_travelled;
         elevation = elevation;
         azimuth = azimuth;
 
     }
     public void Move()
     {
-        Position.X += Velocity.X;
-        Position.Y += Velocity.Y;
+        double time_diff = 1.0;
+        position.X += velocity.X;
+        position.Y += velocity.Y;
+        distance_travelled += Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff;
+        beam_width += beam_width_vel;
+
     }
     public void reverse()
     {
-        Velocity.X = -Velocity.X;
-        Velocity.Y = -Velocity.Y;
+        velocity.X = -velocity.X;
+        velocity.Y = -velocity.Y;
     }
 
-   public void colloid_radar(int tick,int latest_radar_transmission_tick)
-    {
-       double time_diff = latest_radar_transmission_tick - tick;
-        double Target_distance=Magnitude(Velocity)*time_diff/2;
-        Console.WriteLine(Target_distance);
-    }
 
-    public void CollidedTarget(double targetAzimuth)
-    {
-        // Update velocity
-        Velocity.X = -Velocity.X;
-        Velocity.Y = -Velocity.Y;
 
-        // Reset beam width
+    /* public void colloid_radar(int tick,int latest_radar_transmission_tick)
+      {
+         double time_diff = latest_radar_transmission_tick - tick;
+          double Target_distance=Magnitude(Velocity)*time_diff/2;
+          Console.WriteLine(Target_distance);
+      }
+
+      /* public void CollidedTarget(double targetAzimuth)
+       {
+           // Update velocity
+           Velocity.X = -Velocity.X;
+           Velocity.Y = -Velocity.Y;
+
+           // Reset beam width
+           beam_width = 0;
+
+           // Calculate new energy
+           double gain = Gain_table[radar.Frequency, 0];
+           double radarCrossSection = RadarCrossSection[radar.Frequency, (int)(targetAzimuth - azimuth)];
+           double pi = Math.PI;
+
+           double Energy = Energy * (gain * radarCrossSection) / (4 * pi * Math.Pow(Distance_travelled, 2));
+
+           // Update azimuth
+           azimuth += 180;
+
+           // Reset distance travelled
+           Distance_travelled = 0;
+       }*/
+    /* public static double Magnitude(Vector Velocity.X, Vector Velocity.Y)
+     {
+         return Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
+     }
+
+     // Function to calculate energy based on the provided equation
+     public static double CalculateEnergy(double energy, double[,] gain_table, double radar_frequency, double pulse_azimuth, double radar_azimuth, double distance_travelled, double velocityMagnitude)
+     {
+         double pi = Math.PI;
+         double lambda = velocityMagnitude / radar_frequency;
+         double energyFactor = energy * (gain_table[(int)radar_frequency, (int)(pulse_azimuth - radar_azimuth)] * Math.Pow(lambda, 2)) / Math.Pow(4 * pi * distance_travelled, 2);
+         return energyFactor;
+     }
+     public void Collide_radar( int tick, int latest_radar_transmit_tick,)
+     {
+
+
+         double time_diff = latest_radar_transmit_tick - tick;
+         double velocityMagnitude = Magnitude(vel_X, veL_Y);
+         double target_distance = velocityMagnitude * time_diff / 2;
+
+         double target_x = radar_base.x + (target_distance * Math.Cos(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth)); 
+         double target_y = radar_base_y + (target_distance * Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
+
+         Console.WriteLine("Target's x coordinate: " + target_x);
+         Console.WriteLine("Target's y coordinate: " + target_y);
+
+         double distance_travelled = target_distance; // Assuming distance travelled is the same as distance to target
+         double energyFactor = CalculateEnergy(Energy, Gain_table, Radar.frequency, 0, Radar.azimuth, distance_travelled, velocityMagnitude);
+
+     }
+     public void Collided_Target(double target_azimuth)
+     {
+         double pi = Math.PI;
+         Velocity.X = -Velocity.X;
+         Velocity.Y = -Velocity.Y;
+         beam_width = 0;
+         Energy *= (Gain_table[(int)frequency, 0] * RadarCrossSection[(int)frequency, (int)(target_azimuth - azimuth)]) / (4 * pi * Math.Pow(Distance_travelled, 2));
+        azimuth += 180;
+         Distance_travelled = 0;
+     }*/
+    public void Collided_Target(double target_azimuth, List<List<double>> RadarCrossSection, List<double> table, List<double> row)
+    {
+        velocity.X = -velocity.X;
+        velocity.Y = -velocity.Y;
         beam_width = 0;
 
-        // Calculate new energy
-        double gain = Gain_table[radar.Frequency, 0];
-        double radarCrossSection = RadarCrossSection[radar.Frequency, (int)(targetAzimuth - azimuth)];
-        double pi = Math.PI;
-         double Energy = energy * (gain * radarCrossSection) / (4 * pi * Math.Pow(Distance_travelled, 2));
-
-        // Update azimuth
+        // energy = energy * (RadarCrossSection[frequency, (target_azimuth - table[azimuth]]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+        energy = energy * (RadarCrossSection[frequency, (target_azimuth - azimuth)]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
         azimuth += 180;
-
-        // Reset distance travelled
-        Distance_travelled = 0;
+        distance_travelled = 0;
     }
-
-
-    private double Magnitude(Vector velocity)
+    static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
     {
-        throw new NotImplementedException();
+        return degrees * (Math.PI / 180);
     }
 
-    static double Magnitude(double[] vector)
+
+    public void Collide_radar(int tick, int latest_radar_transmit_tick, double frequency)
     {
-        double sumOfSquares = 0.0;
-        foreach (double component in vector)
-        {
-            sumOfSquares += Math.Pow(component, 2);
-        }
-        return Math.Sqrt(sumOfSquares);
+       double time_diff = latest_radar_transmit_tick - tick;
+        double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
+        //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
+        double target_x_coordinate = RadarBase.X + (target_distance * Math.Cos(DegreesToRadians((Radar.Azimuth);
+        double target_y_coordinate = RadarBase.Y + (target_distance * Math.Sin(DegreesToRadians((Radar.Azimuth);
+
+        Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
+        Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
+
+        double lambda = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) / Radar.Frequency;
+
     }
+
+
+
 
 }
 
-public class Wepons : BattleSystem
+    public class Wepons : BattleSystem
 {
     public Platform HostPlatform;
     public Wepons(string id, Platform platform) : base(id)
