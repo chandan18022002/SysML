@@ -503,14 +503,14 @@ public class Pulse
     }
 
 
-    public void Collide_radar(int tick, int latest_radar_transmit_tick, double frequency)
+    public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb)
     {
        double time_diff = latest_radar_transmit_tick - tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
-        double target_x_coordinate = RadarBase.X + (target_distance * Math.Cos(DegreesToRadians((Radar.Azimuth);
-        double target_y_coordinate = RadarBase.Y + (target_distance * Math.Sin(DegreesToRadians((Radar.Azimuth);
-
+        double target_x_coordinate = rb.Position.X + (target_distance * Math.Cos(DegreesToRadians(Radar.Azimuth)));
+        double target_y_coordinate = rb.Position.Y+ (target_distance * Math.Sin(DegreesToRadians(Radar.Azimuth)));
+            
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
 
