@@ -25,7 +25,7 @@ class max_Unamb_range
 
         //radAR  class initialsization
         Radar radar = new Radar("0",radarbase, "sat", "ant", "none", 0, 0, 1.5,500,1.5,"asp",100.0,200.0,1.0,1.0,100.0);
-        radarbase.OnboardSensor.Add(radar);// assigning the onboardsensor to a radar
+        radarbase.onboardSensor.Add(radar);// assigning the onboardsensor to a radar
         radarbaselist.Add(radarbase);
 
         //aircraft class initialsization
@@ -48,7 +48,7 @@ class max_Unamb_range
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
                 //Green Aircraft
-                CvInvoke.Circle(image, new Point((int)aircraftlist[i].Position.X+500, (int)aircraftlist[i].Position.Y), 3, new MCvScalar(0, 255, 0), -1);
+                CvInvoke.Circle(image, new Point((int)aircraftlist[i].position.X+500, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
             }                                                                //umambrange=c/(2f)  =>c is pulse velocity where pulsevelocity is vector quantity sotake magnitude of it (sqrt(velx square)+(vel.y square))   so we get only one value for range beacuse rngeis scalar quantity
                                                                                //f is prf which is 1/pri   ==> 500/(2*0.001)==500
             
@@ -61,19 +61,19 @@ class max_Unamb_range
             for (int i = radarbaselist.Count - 1; i >= 0; i--)
             {
                 //Blue Radar
-                CvInvoke.Circle(image, new Point((int)radarbaselist[i].Position.X, (int)radarbaselist[i].Position.Y), 3, new MCvScalar(255, 0, 0), -1);
+                CvInvoke.Circle(image, new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), 3, new MCvScalar(255, 0, 0), -1);
 
-                if (tick % radar.Pri == 0)
+                if (tick % radar.pri == 0)
                 //if (tick == 0)
                 {
                     //Pulse position should be equal to radar base
                     //create a pulse
                     pul_index += 1;
-                    double vel_x = Math.Cos(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
-                    double vel_y = Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));         
+                    double vel_x = Math.Cos(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));
+                    double vel_y = Math.Sin(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));         
             
                     //creating pulse
-                    Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].Position.X , radarbaselist[i].Position.Y), new Vector(vel_x, vel_y),85,75,22,58);//pulse position should be rdar position so it achieve by .x and .y individually 
+                    Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X , radarbaselist[i].position.Y), new Vector(vel_x, vel_y),55,"sou",85,75,22,58,10,0,0);//pulse position should be rdar position so it achieve by .x and .y individually 
                     initial_time = tick;
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, pulse);
@@ -90,7 +90,7 @@ class max_Unamb_range
                 pulse.Move();
 
 
-                Bgr pulse_pixelValue = GetPixelBgr(image, (int)pulse.Position.X, (int)pulse.Position.Y);
+                Bgr pulse_pixelValue = GetPixelBgr(image, (int)pulse.position.X, (int)pulse.position.Y);
 
                 if (pulse_pixelValue.Green == 255)
                 {
@@ -101,11 +101,11 @@ class max_Unamb_range
                 {
                     double time_diff = tick-initial_time;
                     double pul_vel = 0;
-                    if (pulse.Velocity.X> 0){
-                        pul_vel = pulse.Velocity.X;
+                    if (pulse.velocity.X> 0){
+                        pul_vel = pulse.velocity.X;
                     }
                     else {
-                        pul_vel= -pulse.Velocity.X;
+                        pul_vel= -pulse.velocity.X;
                     }
                     double distance = (pul_vel * time_diff) / 2;     // c is the pulse velocity
 
@@ -115,7 +115,7 @@ class max_Unamb_range
                 }
 
                 //   draw red circle for each pulse
-                CvInvoke.Circle(image, new Point((int)pulse.Position.X, (int)pulse.Position.Y), 3, new MCvScalar(0, 0, 255), -1);
+                CvInvoke.Circle(image, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(0, 0, 255), -1);
                 
             }
 

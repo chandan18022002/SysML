@@ -24,21 +24,21 @@ public abstract class BattleSystem
 
 public class Platform : BattleSystem
 {
-    public Vector Position;
-    public double Speed;
-    public double Heading;
-    public List<Waypoint> Waypoints;
-    public static List<Sensor> OnboardSensor;
-    public List<List<double>> RadarCrossSection;
+    public Vector position;
+    public double speed;
+    public double heading;
+    public List<Waypoint> waypoints;
+    public List<Sensor> onboardSensor;
+    public  List<List<double>> RadarCrossSection;
 
     public Platform(string id, Vector position, double speed, double heading, List<Waypoint> waypoints, List<Sensor> OnBoardsensor) 
         : base(id)
     {
-        Position = position;
-        Speed = speed;
-        Heading = heading;
-        Waypoints = waypoints;
-        OnboardSensor = OnBoardsensor;
+        position = position;
+        speed = speed;
+        heading = heading;
+        waypoints = waypoints;
+        onboardSensor = OnBoardsensor;
         RadarCrossSection = CreateRadarCrossSection();
     }
 
@@ -109,10 +109,10 @@ public class Waypoint
 
 public class Sensor : BattleSystem
 {
-    public Platform HostPlatform;
+    public Platform hostPlatform;
     public Sensor(string id, Platform platform) : base(id)
     {
-        HostPlatform = platform;
+        hostPlatform = platform;
     }
 
     public virtual List<object> Detect()
@@ -142,46 +142,49 @@ public class Sensor : BattleSystem
 public class Radar : Sensor
 {
 
-    public string OperatingMode;
-    public string Antenna;
-    public string Modulation;
-    public double Elevation;
-    public  static double Azimuth;
-    public  static double Frequency;
-    public int Pri; // Pulse Repetition Interval
-    public double Pwd; // Pulse Width Duration
-    public string AntennaScanPattern;
-    public List<object> Detected;
-    public double Detection_Range;
-    public double Detectability_Range ;
-    public double Resolution_Cell ;
-    public double Minimum_Range; 
-    public double Max_Unambiguous_Range; 
-
+    public string operatingMode;
+    public string antenna;
+    public string modulation;
+    public double elevation;
+    public    double azimuth;
+    public   double frequency;
+    public int pri; // Pulse Repetition Interval
+    public double pwd; // Pulse Width Duration
+    public string antenna_scan_pattern;
+    public List<object> detected;
+    public double detection_Range;
+    public double detectability_Range ;
+    public double resolution_Cell ;
+    public double minimum_Range; 
+    public double max_Unambiguous_Range; 
+   
     public List<List<double>> Gain_table;
     private int resolution_cell;
 
-    public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range,double resenution_cell, double minimum_range,double  max_unamb_range/*, List<List<double>> gain_table*/) 
+    public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)
     {
 
-        OperatingMode = operatingMode;
-        Antenna = antenna;
-        Modulation = modulation;
-        Elevation = elevation;
-        Azimuth = azimuth;
-        Frequency = frequency;
-        Pri = pri;
-        Pwd = pwd;
-        AntennaScanPattern = antennaScanPattern;
-        Detected = new List<object>();
-        Detection_Range = detection_range;
-        Detectability_Range = detectability_range;
-        Resolution_Cell = resolution_cell;
-        Minimum_Range = minimum_range;
-        Max_Unambiguous_Range = max_unamb_range;
-     Gain_table = CreateGainTable();
+        operatingMode = operatingMode;
+        antenna = antenna;
+        modulation = modulation;
+        elevation = elevation;
+        azimuth = azimuth;
+        frequency = frequency;
+        pri = pri;
+        pwd = pwd;
+        antennaScanPattern = antennaScanPattern;
+        detected = new List<object>();
+        detection_Range = detection_range;
+        detectability_Range = detectability_range;
+        resolution_Cell = resolution_cell;
+        minimum_Range = minimum_range;
+        max_Unambiguous_Range = max_unamb_range;
+        
 
+
+        Gain_table = CreateGainTable();
+        
     }
 
     public void Transmit()
@@ -372,16 +375,18 @@ public class Pulse
 {
     public int Id;
     public Vector position;
-    public Vector velocity;
+     public Vector velocity;
+    
     public double energy = 0;
-    public string source;
+    public double source;
     public double pwd;
     public double frequency;
     public double beam_width;
     public double beam_width_vel;
     public double distance_travelled;
     public double elevation;
-    public static  double azimuth;
+    public  double azimuth;
+    
     
 
     public Pulse(int id, Vector position, Vector velocity,double energy,string source, double pwd, double frequency, double beam_width, double beam_width_vel,double Distance_travelled, double elevation,double azimuth)
@@ -397,7 +402,7 @@ public class Pulse
         distance_travelled = distance_travelled;
         elevation = elevation;
         azimuth = azimuth;
-
+       
     }
     public void Move()
     {
@@ -413,87 +418,14 @@ public class Pulse
         velocity.X = -velocity.X;
         velocity.Y = -velocity.Y;
     }
-
-
-
-    /* public void colloid_radar(int tick,int latest_radar_transmission_tick)
-      {
-         double time_diff = latest_radar_transmission_tick - tick;
-          double Target_distance=Magnitude(Velocity)*time_diff/2;
-          Console.WriteLine(Target_distance);
-      }
-
-      /* public void CollidedTarget(double targetAzimuth)
-       {
-           // Update velocity
-           Velocity.X = -Velocity.X;
-           Velocity.Y = -Velocity.Y;
-
-           // Reset beam width
-           beam_width = 0;
-
-           // Calculate new energy
-           double gain = Gain_table[radar.Frequency, 0];
-           double radarCrossSection = RadarCrossSection[radar.Frequency, (int)(targetAzimuth - azimuth)];
-           double pi = Math.PI;
-
-           double Energy = Energy * (gain * radarCrossSection) / (4 * pi * Math.Pow(Distance_travelled, 2));
-
-           // Update azimuth
-           azimuth += 180;
-
-           // Reset distance travelled
-           Distance_travelled = 0;
-       }*/
-    /* public static double Magnitude(Vector Velocity.X, Vector Velocity.Y)
-     {
-         return Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
-     }
-
-     // Function to calculate energy based on the provided equation
-     public static double CalculateEnergy(double energy, double[,] gain_table, double radar_frequency, double pulse_azimuth, double radar_azimuth, double distance_travelled, double velocityMagnitude)
-     {
-         double pi = Math.PI;
-         double lambda = velocityMagnitude / radar_frequency;
-         double energyFactor = energy * (gain_table[(int)radar_frequency, (int)(pulse_azimuth - radar_azimuth)] * Math.Pow(lambda, 2)) / Math.Pow(4 * pi * distance_travelled, 2);
-         return energyFactor;
-     }
-     public void Collide_radar( int tick, int latest_radar_transmit_tick,)
-     {
-
-
-         double time_diff = latest_radar_transmit_tick - tick;
-         double velocityMagnitude = Magnitude(vel_X, veL_Y);
-         double target_distance = velocityMagnitude * time_diff / 2;
-
-         double target_x = radar_base.x + (target_distance * Math.Cos(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth)); 
-         double target_y = radar_base_y + (target_distance * Math.Sin(DegreesToRadians(((Radar)radarbase.OnboardSensor[0]).Azimuth));
-
-         Console.WriteLine("Target's x coordinate: " + target_x);
-         Console.WriteLine("Target's y coordinate: " + target_y);
-
-         double distance_travelled = target_distance; // Assuming distance travelled is the same as distance to target
-         double energyFactor = CalculateEnergy(Energy, Gain_table, Radar.frequency, 0, Radar.azimuth, distance_travelled, velocityMagnitude);
-
-     }
-     public void Collided_Target(double target_azimuth)
-     {
-         double pi = Math.PI;
-         Velocity.X = -Velocity.X;
-         Velocity.Y = -Velocity.Y;
-         beam_width = 0;
-         Energy *= (Gain_table[(int)frequency, 0] * RadarCrossSection[(int)frequency, (int)(target_azimuth - azimuth)]) / (4 * pi * Math.Pow(Distance_travelled, 2));
-        azimuth += 180;
-         Distance_travelled = 0;
-     }*/
-    public void Collided_Target(double target_azimuth, List<List<double>> RadarCrossSection, List<double> table, List<double> row)
+    
+    public void Collided_Target(double target_azimuth, RadarBase radarBase)
     {
         velocity.X = -velocity.X;
         velocity.Y = -velocity.Y;
         beam_width = 0;
-
-        // energy = energy * (RadarCrossSection[frequency, (target_azimuth - table[azimuth]]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
-        energy = energy * (RadarCrossSection[frequency, (target_azimuth - azimuth)]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+        energy = energy * (radarBase.RadarCrossSection[(int)frequency][(int)(target_azimuth - azimuth)]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+        
         azimuth += 180;
         distance_travelled = 0;
     }
@@ -503,19 +435,20 @@ public class Pulse
     }
 
 
-    public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb)
+    public  void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb,Pulsed_radar pradar)
     {
        double time_diff = latest_radar_transmit_tick - tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
-        double target_x_coordinate = rb.Position.X + (target_distance * Math.Cos(DegreesToRadians(Radar.Azimuth)));
-        double target_y_coordinate = rb.Position.Y+ (target_distance * Math.Sin(DegreesToRadians(Radar.Azimuth)));
+        double target_x_coordinate = rb.position.X + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
+        double target_y_coordinate = rb.position.Y+ (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
             
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
 
-        double lambda = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) / Radar.Frequency;
-
+        double lambda = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) / pradar.frequency;
+        energy = energy * (pradar.Gain_table[(int)frequency][(int)(azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+      
     }
 
 
@@ -550,7 +483,7 @@ public class Pulse
 }
 public class Guns : Wepons
 {
-    public string Id;
+    public string id;
     public double elivation;
     public double azimuth;
     public Guns(string id, Platform platform, double Elivation, double Azimuth) : base(id, platform)
@@ -564,16 +497,16 @@ public class Guns : Wepons
 public class Missiles : Wepons
 {
 
-    public Vector Position;
-    public double Speed;
-    public double Heading;
-    public List<Waypoint> Waypoints;
-    public Missiles(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints) : base(id, platform)
+    public Vector position;
+    public double speed;
+    public double heading;
+    public List<Waypoint> waypoints;
+    public Missiles(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform)
     {
-        Position = Position;
-        Speed = Speed;
-        Heading = heading;
-        Waypoints = waypoints;
+        position = position;
+        speed = speed;
+        heading = heading;
+        waypoints = waypoints;
     }
     public override void Set(string id)
     {
@@ -617,7 +550,7 @@ public class AAA : Guns
 public class Radar_guided : Missiles
 {
 
-    public Radar_guided(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints) : base(id, platform, Position, Speed, heading, waypoints)
+    public Radar_guided(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
 
     {
 
@@ -641,7 +574,7 @@ public class Radar_guided : Missiles
 public class Active_guider : Missiles
 {
     double onboard_radar;
-    public Active_guider(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints, double onboard_radar) : base(id, platform, Position, Speed, heading, waypoints)
+    public Active_guider(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar) : base(id, platform, position, speed, heading, waypoints)
 
     {
         onboard_radar = onboard_radar;
@@ -665,7 +598,7 @@ public class Active_guider : Missiles
 public class Image_guidence : Missiles
 {
     double onboard__image_sensor;
-    public Image_guidence(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor) : base(id, platform, Position, Speed, heading, waypoints)
+    public Image_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor) : base(id, platform, position, speed, heading, waypoints)
 
     {
         onboard_image_sensor = onboard_image_sensor;
@@ -689,7 +622,7 @@ public class Image_guidence : Missiles
 public class Gps_guidence : Missiles
 {
 
-    public Gps_guidence(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints) : base(id, platform, Position, Speed, heading, waypoints)
+    public Gps_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
 
     {
 
@@ -713,7 +646,7 @@ public class Gps_guidence : Missiles
 public class Semiacive_guidence : Missiles
 {
     double onboard__image_sensor;
-    public Semiacive_guidence(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints, double onboard_receiver) : base(id, platform, Position, Speed, heading, waypoints)
+    public Semiacive_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver) : base(id, platform, position, speed, heading, waypoints)
 
     {
         onboard_receiver = onboard_receiver;
@@ -737,7 +670,7 @@ public class Semiacive_guidence : Missiles
 public class Passive_guidence : Missiles
 {
 
-    public Passive_guidence(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints) : base(id, platform, Position, Speed, heading, waypoints)
+    public Passive_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
 
     {
 
@@ -761,7 +694,7 @@ public class Passive_guidence : Missiles
 public class Terrian_following_guidence : Missiles
 {
 
-    public Terrian_following_guidence(string id, Platform platform, Vector Position, double Speed, double heading, List<Waypoint> waypoints) : base(id, platform, Position, Speed, heading, waypoints)
+    public Terrian_following_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
 
     { 
 
