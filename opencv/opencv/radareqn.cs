@@ -121,10 +121,29 @@ class radareqn
                     double vel_y = temp_velocity * Math.Sin(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));
 
 
-                    //creating pulse                                                                                                                           radar.peak_transmit_power*radar.gain_table[radar.frequency,0]
+                    //creating pulse                                                                                                                          
 
-                    Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y), new Vector(vel_x, vel_y),( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
+                    // Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y), new Vector(vel_x, vel_y),
+                    //  ( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
                     //pulse position should be rdar position so it achieve by .x and .y individually 
+
+                    double power = pulse_radar.peak_transmission_power * pulse_radar.Gain_table[pulse_radar.frequency][0];
+                    int powerInt = (int)power; // Convert double to int, truncating any fractional part
+
+                    Pulse pulse = new Pulse(
+                        current_pulse_id,
+                        new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y),
+                        new Vector(vel_x, vel_y),
+                        powerInt, // Use the converted int value
+                        pulse_radar,
+                        pulse_radar.Pwd,
+                        pulse_radar.frequency,
+                        0.0,
+                        0.01,
+                        0.0,
+                        0.0,
+                        pulse_radar.azimuth
+                    );
 
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, value: pulse);

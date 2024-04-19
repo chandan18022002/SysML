@@ -32,11 +32,10 @@
               "RelativeDocumentMoniker": "opencv\\max_Unamb_range.cs",
               "ToolTip": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\max_Unamb_range.cs",
               "RelativeToolTip": "opencv\\max_Unamb_range.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAgwEcAAABqAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAAcwFEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-27T05:41:45.903Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -46,7 +45,7 @@
               "RelativeDocumentMoniker": "opencv\\radareqn.cs",
               "ToolTip": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\radareqn.cs",
               "RelativeToolTip": "opencv\\radareqn.cs",
-              "ViewState": "AQIAAGsAAAAAAAAAAAAcwGgAAAAAAAAA",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAswH0AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-11T12:23:54.31Z",
               "EditorCaption": ""
@@ -57,9 +56,9 @@
               "Title": "classes.cs",
               "DocumentMoniker": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\classes.cs",
               "RelativeDocumentMoniker": "opencv\\classes.cs",
-              "ToolTip": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\classes.cs",
-              "RelativeToolTip": "opencv\\classes.cs",
-              "ViewState": "AQIAAOkBAAAAAAAAAAAmwP8BAABxAAAA",
+              "ToolTip": "C:\\Users\\Pinaka\\source\\repos\\SysML\\opencv\\opencv\\classes.cs*",
+              "RelativeToolTip": "opencv\\classes.cs*",
+              "ViewState": "AQIAAOICAAAAAAAAAAAYwAoDAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-11T06:17:01.794Z",
               "EditorCaption": ""
