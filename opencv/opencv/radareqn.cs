@@ -105,7 +105,7 @@ class radareqn
                 //Blue Radar
                 //  RadarBase current_radarbase = ((RadarBase)pulse_radar_list.onboardSensor[0].position);
 
-                RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].onboardSensor)).pulse_radar_list[i];
+                RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].hostPlatform));
 
 
 
