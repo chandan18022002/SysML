@@ -34,11 +34,11 @@ public class Platform : BattleSystem
     public Platform(string id, Vector position, double speed, double heading, List<Waypoint> waypoints, List<Sensor> OnBoardsensor) 
         : base(id)
     {
-        position = position;
-        speed = speed;
-        heading = heading;
-        waypoints = waypoints;
-        onboardSensor = OnBoardsensor;
+        this.position = position;
+        this.speed = speed;
+        this.heading = heading;
+        this.waypoints = waypoints;
+        this.onboardSensor = OnBoardsensor;
         RadarCrossSection = CreateRadarCrossSection();
     }
 
@@ -90,8 +90,8 @@ public class Vector
     public double Y;
     public  Vector(double x, double y)
     {
-        X = x;
-        Y = y;
+        this.X = x;
+        this.Y = y;
     }
 }
 
@@ -103,7 +103,7 @@ public class Waypoint
 
     public Waypoint(int location)
     {
-        Location = location;
+         this.Location = location;
     }
 }
 
@@ -112,7 +112,7 @@ public class Sensor : BattleSystem
     public Platform hostPlatform;
     public Sensor(string id, Platform platform) : base(id)
     {
-        hostPlatform = platform;
+        this.hostPlatform = platform;
     }
 
     public virtual List<object> Detect()
@@ -165,21 +165,21 @@ public class Radar : Sensor
         : base(id, platform)
     {
 
-        operatingMode = operatingMode;
-        antenna = antenna;
-        modulation = modulation;
-        elevation = elevation;
-        azimuth = azimuth;
-        frequency = frequency;
-        pri = pri;
-        pwd = pwd;
-        antennaScanPattern = antennaScanPattern;
-        detected = new List<object>();
-        detection_Range = detection_range;
-        detectability_Range = detectability_range;
-        resolution_Cell = resolution_cell;
-        minimum_Range = minimum_range;
-        max_Unambiguous_Range = max_unamb_range;
+        this.operatingMode = operatingMode;
+        this. antenna = antenna;
+        this.modulation = modulation;
+        this. elevation = elevation;
+        this.azimuth = azimuth;
+        this.frequency = frequency;
+        this.pri = pri;
+        this.pwd = pwd;
+        this.antenna_scan_pattern = antennaScanPattern;
+        this. detected = new List<object>();
+        this. detection_Range = detection_range;
+        this. detectability_Range = detectability_range;
+        this. resolution_Cell = resolution_cell;
+        this.minimum_Range = minimum_range;
+        this.max_Unambiguous_Range = max_unamb_range;
         
 
 
@@ -240,10 +240,10 @@ public class Pulsed_radar : Radar
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     
     {
-        Pri = pri; // Pulse Repetition Interval
-        Pwd = pwd;
-        prf = prf;
-        peak_transmission_power = peak_transmission_power;
+        this.Pri = pri; // Pulse Repetition Interval
+        this.Pwd = pwd;
+        this.prf = prf;
+        this.peak_transmission_power = peak_transmission_power;
 
     }
     public override void Set(string id)
@@ -270,8 +270,8 @@ public class Continous_wave : Radar
     public Continous_wave(string id, Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
           : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
-        TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
-        ReceivedFrequency = received_frequency; // Initialize Received Frequency
+        this.TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
+        this.ReceivedFrequency = received_frequency; // Initialize Received Frequency
     }
     public override void Set(string id)
     {
@@ -378,7 +378,7 @@ public class Pulse
      public Vector velocity;
     
     public double energy = 0;
-    public double source;
+    public Radar source;
     public double pwd;
     public double frequency;
     public double beam_width;
@@ -389,19 +389,19 @@ public class Pulse
     
     
 
-    public Pulse(int id, Vector position, Vector velocity,double energy,string source, double pwd, double frequency, double beam_width, double beam_width_vel,double Distance_travelled, double elevation,double azimuth)
+    public Pulse(int id, Vector position, Vector velocity,double energy,Radar source, double pwd, double frequency, double beam_width, double beam_width_vel,double Distance_travelled, double elevation,double azimuth)
     {
-        Id = id;
-        position = position;
-        velocity = velocity;
-        energy = energy;
-        source = source;
-        pwd = pwd;
-        frequency = frequency;
-        beam_width = beam_width;
-        distance_travelled = distance_travelled;
-        elevation = elevation;
-        azimuth = azimuth;
+        this.Id = id;
+        this.position = position;
+        this.velocity = velocity;
+        this.energy = energy;
+        this.source = source;
+        this.pwd = pwd;
+        this.frequency = frequency;
+        this.beam_width = beam_width;
+        this.distance_travelled = distance_travelled;
+        this.elevation = elevation;
+        this.azimuth = azimuth;
        
     }
 
@@ -422,15 +422,15 @@ public class Pulse
         velocity.Y = -velocity.Y;
     }
     
-    public void Collided_Target(double target_azimuth, RadarBase radarBase)
+    public void Collided_Target(Aircraft aircraft)
     {
-        velocity.X = -velocity.X;
-        velocity.Y = -velocity.Y;
+       velocity.X = -velocity.X;
+       velocity.Y = -velocity.Y;
         beam_width = 0;
-        energy = energy * (radarBase.RadarCrossSection[(int)frequency][(int)(target_azimuth - azimuth)]) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+        this.energy = this.energy * (aircraft.RadarCrossSection[(int)frequency][(int)(aircraft.heading - this.azimuth)]) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
         
-        azimuth += 180;
-        distance_travelled = 0;
+        this.azimuth += 180;
+        this.distance_travelled = 0;
     }
     static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
     {
@@ -449,8 +449,8 @@ public class Pulse
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
 
-        double lambda = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) / pradar.frequency;
-        energy = energy * (pradar.Gain_table[(int)frequency][(int)(azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(distance_travelled, 2));
+        double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
+        this.energy = this.energy * (pradar.Gain_table[(int)frequency][(int)(this.azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
       
     }
 
@@ -464,7 +464,7 @@ public class Pulse
     public Platform HostPlatform;
     public Wepons(string id, Platform platform) : base(id)
     {
-        HostPlatform = platform;
+      this.HostPlatform = platform;
     }
 
 
@@ -491,8 +491,8 @@ public class Guns : Wepons
     public double azimuth;
     public Guns(string id, Platform platform, double Elivation, double Azimuth) : base(id, platform)
     {
-        Id = id;
-        elivation = Elivation;
+       this. Id = id;
+       this. elivation = Elivation;
         azimuth = Azimuth;
     }
 }
@@ -506,10 +506,10 @@ public class Missiles : Wepons
     public List<Waypoint> waypoints;
     public Missiles(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform)
     {
-        position = position;
-        speed = speed;
-        heading = heading;
-        waypoints = waypoints;
+      this.position = position;
+      this. speed = speed;
+      this. heading = heading;
+      this.waypoints = waypoints;
     }
     public override void Set(string id)
     {
@@ -532,7 +532,7 @@ public class AAA : Guns
     public double shell_fuses_delay;
     public AAA(string id, Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
     {
-        shell_fuses_delay = shell_fuses_delay;
+       this. shell_fuses_delay = shell_fuses_delay;
     }
     public override void Set(string id)
     {
@@ -580,7 +580,7 @@ public class Active_guider : Missiles
     public Active_guider(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar) : base(id, platform, position, speed, heading, waypoints)
 
     {
-        onboard_radar = onboard_radar;
+       this. onboard_radar = onboard_radar;
     }
     public override void Set(string id)
     {
@@ -604,7 +604,7 @@ public class Image_guidence : Missiles
     public Image_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor) : base(id, platform, position, speed, heading, waypoints)
 
     {
-        onboard_image_sensor = onboard_image_sensor;
+      this.onboard__image_sensor = onboard_image_sensor;
     }
     public override void Set(string id)
     {
@@ -648,11 +648,11 @@ public class Gps_guidence : Missiles
 }
 public class Semiacive_guidence : Missiles
 {
-    double onboard__image_sensor;
+    double onboard_receiver;
     public Semiacive_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver) : base(id, platform, position, speed, heading, waypoints)
 
     {
-        onboard_receiver = onboard_receiver;
+       this. onboard_receiver = onboard_receiver;
     }
     public override void Set(string id)
     {
@@ -730,11 +730,11 @@ public class Esn :Sensor
     public Esn(string id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
          : base(id, platform)
     {
-        no_of_antenna = no_of_antenna;
-        pwds = pwds;
-        emmiter_records = emmiter_records;
-        antenna_configaration = antenna_configaration;
-        reception_band = reception_band;
+        this.no_of_antenna = no_of_antenna;
+        this.pwds = pwds;
+        this. emmiter_records = emmiter_records;
+        this.antenna_configaration = antenna_configaration;
+        this.reception_band = reception_band;
     }
     public void generate_pwd()
     {
@@ -760,11 +760,11 @@ public class Rwr : Sensor
     public Rwr(string id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
          : base(id, platform)
     {
-        no_of_antenna = no_of_antenna;
-        pwds = pwds;
-        emmiter_records = emmiter_records;
-        antenna_configaration = antenna_configaration;
-        reception_band = reception_band;
+       this. no_of_antenna = no_of_antenna;
+       this. pwds = pwds;
+       this. emmiter_records = emmiter_records;
+        this.antenna_configaration = antenna_configaration;
+       this. reception_band = reception_band;
     }
     public void generate_pwd()
     {

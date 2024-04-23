@@ -6,27 +6,28 @@ using radar;         // here im using radar namespace of other ( claseses) file
 
 class radareqn
 {
+    private static object onboardSensor;
+
     static void Main(string[] args)
     {
-
         //Create an empty list of pulses,radarbase,aircraft
         // List<Pulse> pulselist = new List<Pulse>();
         List<RadarBase> radarbaselist = new List<RadarBase>();
         List<Aircraft> aircraftlist = new List<Aircraft>();
+        List<Radar> pulse_radar_list = new List<Radar>();
 
         //Dictionary of the pulse
-
         Dictionary<int, Pulse> pulse_dictionary = new Dictionary<int, Pulse>();
-
-        // radAR BASE class initialsization
+        // RADAR BASE class initialsization
 
         RadarBase radarbase = new RadarBase("0", new Vector(100, 300), 0, 0, [], []);
+        radarbaselist.Add(radarbase);
 
 
         //radAR  class initialsization
         Pulsed_radar pulse_radar = new Pulsed_radar("0", radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 500, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
-        radarbaselist.Add(radarbase);
+        pulse_radar_list.Add(pulse_radar);
 
         //aircraft class initialsization
         Aircraft aircraft = new Aircraft("0", new Vector(500, 300), 0, 0, [], []);
@@ -63,7 +64,7 @@ class radareqn
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
 
-                Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraft.position.X, (int)aircraft.position.Y);
+                Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
 
                 if (actual_pixelValue.Red == 255)
                 {
@@ -73,7 +74,7 @@ class radareqn
                     {
                         Pulse pulse = pulse_dictionary[pul_index];
                         //pulse.Collided_Target(aircraft.heading, RadarCrossSection);
-                        pulse.Collided_Target(aircraft.heading,radarbase);
+                        pulse.Collided_Target(aircraft);
                     }
                 }
 
@@ -98,18 +99,21 @@ class radareqn
                 pulse_dictionary.Remove(i);
             }
 
-            static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
-            {
-                return degrees * (Math.PI / 180);
-            }
 
-
-
-            for (int i = radarbaselist.Count - 1; i >= 0; i--)
+            for (int i = pulse_radar_list.Count - 1; i >= 0; i--)//instead of radarbase list use pulse_radar_list
             {
                 //Blue Radar
-                CvInvoke.Circle(image_actual, new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), 3, new MCvScalar(255, 0, 0), -1);
+                //  RadarBase current_radarbase = ((RadarBase)pulse_radar_list.onboardSensor[0].position);
 
+                RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].onboardSensor)).pulse_radar_list[i];
+
+
+
+                //RadarBase current_radar__base = pulse_radar_list[i];
+                //current radar base is onboard sensor in pulse_radar_list[i]
+                // Use current radar base position for circle
+                CvInvoke.Circle(image_actual, new Point((int)current_radarbase.position.X, (int)current_radarbase.position.Y), 3, new MCvScalar(255, 0, 0), -1);
+                // use pulse_radar_list[i] instead of pulse_radar
                 if (tick % pulse_radar.Pri == 0)
                 //if (tick == 0)
                 {
@@ -117,7 +121,7 @@ class radareqn
                     //create a pulse
                     pul_index += 1;
                     double temp_velocity = 1;
-                    double vel_x = temp_velocity * Math.Cos(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));
+                    double vel_x = temp_velocity * Math.Cos(DegreesToRadians((((Radar)radarbase.onboardSensor[0]).azimuth)));
                     double vel_y = temp_velocity * Math.Sin(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));
 
 
@@ -126,8 +130,9 @@ class radareqn
                     // Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y), new Vector(vel_x, vel_y),
                     //  ( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
                     //pulse position should be rdar position so it achieve by .x and .y individually 
-
-                    double power = pulse_radar.peak_transmission_power * pulse_radar.Gain_table[pulse_radar.frequency][0];
+                    // pulse_radar.frequency convert to index
+                   
+                    double power = pulse_radar.peak_transmission_power * pulse_radar.Gain_table[36][0];     //36 beacause it is index value of 18.5 frequency
                     int powerInt = (int)power; // Convert double to int, truncating any fractional part
 
                     Pulse pulse = new Pulse(
@@ -147,6 +152,7 @@ class radareqn
 
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, value: pulse);
+
                     latest_radar_transmission_tick = tick;
                     current_pulse_id += 1;
                     if (current_pulse_id >= 250)
@@ -160,8 +166,8 @@ class radareqn
             
                 tick += 1;
 
-                CvInvoke.Imshow("Visualise", image_visual);
-                CvInvoke.Imshow("Visualisation", image_actual);
+                CvInvoke.Imshow("Visual", image_visual);
+                CvInvoke.Imshow("actual", image_actual);
 
                 int key = CvInvoke.WaitKey(10);
 
@@ -172,9 +178,15 @@ class radareqn
                 }
             }
                 CvInvoke.DestroyAllWindows();
-            
-        }
-        static Bgr GetPixelValue(Mat image, int x, int y)
+
+    }
+
+    static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
+    {
+        return degrees * (Math.PI / 180);
+    }
+
+    static Bgr GetPixelValue(Mat image, int x, int y)
         {
             // Get the data pointer for the image
             IntPtr ptr = image.DataPointer;
