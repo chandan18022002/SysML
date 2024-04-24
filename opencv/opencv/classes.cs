@@ -29,7 +29,7 @@ public class Platform : BattleSystem
     public double heading;
     public List<Waypoint> waypoints;
     public List<Sensor> onboardSensor;
-    public  List<List<double>> RadarCrossSection;
+    public Dictionary<double, double[]> RadarCrossSection;
 
     public Platform(string id, Vector position, double speed, double heading, List<Waypoint> waypoints, List<Sensor> OnBoardsensor) 
         : base(id)
@@ -48,24 +48,24 @@ public class Platform : BattleSystem
         Console.WriteLine("Platform is moving!");
     }
 
-    public List<List<double>> CreateRadarCrossSection()
+    public Dictionary<double, double[]> CreateRadarCrossSection()
     {
-        List<List<double>> table = new List<List<double>>();
+        Dictionary<double, double[]> RadarCrossSection = new Dictionary<double, double[]>();
 
-        for (int i = 0; i <= 360; i++)
+        // Populate the dictionary
+        for (double keys = 0.5; keys <= 18.5; keys += 0.5)
         {
-            List<double> row = new List<double>();
-
-            for (double elevation = 0.5; elevation <= 18.5; elevation += 0.5)
+            double[] cosineValues = new double[360];
+            for (int azimuth = 0; azimuth < 360; azimuth++)
             {
-                row.Add(1); // Add 1 to the current row (all values are 1)
+                cosineValues[azimuth] = 1; // Set the value to 1 for each azimuth angle
             }
-
-            table.Add(row);
+            RadarCrossSection.Add(keys, cosineValues);
         }
 
-        return table;
+        return RadarCrossSection; // Return the populated dictionary
     }
+
 
     public override void Set(string id)
     {
@@ -158,7 +158,7 @@ public class Radar : Sensor
     public double minimum_Range; 
     public double max_Unambiguous_Range; 
    
-    public List<List<double>> Gain_table;
+    public Dictionary<double, double[]> Gain_table;
     private int resolution_cell;
 
     public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
@@ -181,8 +181,6 @@ public class Radar : Sensor
         this.minimum_Range = minimum_range;
         this.max_Unambiguous_Range = max_unamb_range;
         
-
-
         Gain_table = CreateGainTable();
         
     }
@@ -199,27 +197,28 @@ public class Radar : Sensor
         Console.WriteLine("Radar is receiving...");
         return new object(); // Placeholder for received signal
     }
-    private List<List<double>> CreateGainTable()
+
+
+  
+    private Dictionary<double, double[]> CreateGainTable()
     {
-        List<List<double>> table = new List<List<double>>();
+        Dictionary<double, double[]> Gain_Table = new Dictionary<double, double[]>();
 
-        for (int i = 0; i <= 360; i++)
+        // Populate the dictionary
+        for (double keys = 0.5; keys <= 18.5; keys += 0.5)
         {
-            // double azimuth = i;
-
-            List<double> row = new List<double>();
-
-            for (double frequency = 0.5; frequency <= 18.5; frequency += 0.5)
+            double[] cosineValues = new double[360];
+            for (int azimuth = 0; azimuth < 360; azimuth++)
             {
-                double gain = Math.Cos(DegreesToRadians(i));
-                row.Add(gain);
+                double radians = DegreesToRadians(azimuth + 1); // Convert angle to radians
+                cosineValues[azimuth] = Math.Cos(radians);
             }
-
-            table.Add(row);
+            Gain_Table.Add(keys, cosineValues);
         }
 
-        return table;
+        return Gain_Table; // Return the populated dictionary
     }
+
     static double DegreesToRadians(double degrees)
     {
         return degrees * (Math.PI / 180);
@@ -375,7 +374,7 @@ public class Pulse
 {
     public int Id;
     public Vector position;
-     public Vector velocity;
+    public Vector velocity;
     
     public double energy = 0;
     public Radar source;
@@ -410,10 +409,10 @@ public class Pulse
     public void Move()
     {
         double time_diff = 1.0;
-        position.X += velocity.X;
-        position.Y += velocity.Y;
-        distance_travelled += Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff;
-        beam_width += beam_width_vel;
+        this.position.X += this.velocity.X;
+        this.position.Y += this.velocity.Y;
+        this.distance_travelled += Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) * time_diff;
+        this.beam_width += this.beam_width_vel;
 
     }
     public void reverse()
@@ -424,13 +423,17 @@ public class Pulse
     
     public void Collided_Target(Aircraft aircraft)
     {
-       velocity.X = -velocity.X;
-       velocity.Y = -velocity.Y;
-        beam_width = 0;
-        this.energy = this.energy * (aircraft.RadarCrossSection[(int)frequency][(int)(aircraft.heading - this.azimuth)]) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
-        
+        this.velocity.X = -this.velocity.X;
+        this.velocity.Y = -this.velocity.Y;
+        this.beam_width = 0;
+        double temp_val = aircraft.RadarCrossSection[(int)this.frequency][(int)(aircraft.heading - this.azimuth)];
+        this.energy = this.energy * (temp_val) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
         this.azimuth += 180;
         this.distance_travelled = 0;
+        for(int j=0; j<2; j++)
+        {
+            this.Move();
+        }
     }
     static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
     {
@@ -440,22 +443,19 @@ public class Pulse
 
     public  void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb,Pulsed_radar pradar)
     {
-       double time_diff = latest_radar_transmit_tick - tick;
+       double time_diff = tick-latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
-        double target_x_coordinate = rb.position.X + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
+        double target_x_coordinate = rb.position.X + 9 + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
         double target_y_coordinate = rb.position.Y+ (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
             
-        Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
-        Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
-
         double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
         this.energy = this.energy * (pradar.Gain_table[(int)frequency][(int)(this.azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
-      
+
+        Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
+        Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
+        Console.WriteLine("Pulse's recieved energy: " + this.energy);
     }
-
-
-
 
 }
 
