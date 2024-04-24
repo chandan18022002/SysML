@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -28,7 +29,7 @@ class radareqn
         pulse_radar_list.Add(pulse_radar);
 
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft("0", new Vector(500, 300), 0, 0, [], []);
+        Aircraft aircraft = new Aircraft("0", new Vector(550, 320), 0, 0, [], []);
         aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
 
 
@@ -49,8 +50,14 @@ class radareqn
                 //Red Pulse
                 int currentKey = pulse_dictionary.Keys.ElementAt(i);
                 Pulse pulse = pulse_dictionary[currentKey];
-                CvInvoke.Circle(image_visual, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(currentKey, 0, 255), -1);
-                CvInvoke.Circle(image_actual, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(currentKey, 0, 255), -1);
+                int x1 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(90))));
+                int y1 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(90))));
+                int x2 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(-90))));
+                int y2 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(-90))));
+                CvInvoke.Line(image_actual, new Point(x1, y1), new Point(x2, y2), new MCvScalar(currentKey, 0, 255), 3);
+                CvInvoke.Line(image_visual, new Point(x1, y1), new Point(x2, y2), new MCvScalar(currentKey, 0, 255), 3);
+                //CvInvoke.Circle(image_visual, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(currentKey, 0, 255), -1);
+                //CvInvoke.Circle(image_actual, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(currentKey, 0, 255), -1);
                 pulse.Move();
             }
 
@@ -126,7 +133,7 @@ class radareqn
                         pulse_radar_list[i].Pwd,
                         pulse_radar_list[i].frequency,
                         0.0,
-                        0.01,
+                        0.05,
                         0.0,
                         0.0,
                         pulse_radar_list[i].azimuth

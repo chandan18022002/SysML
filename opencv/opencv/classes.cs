@@ -398,6 +398,7 @@ public class Pulse
         this.pwd = pwd;
         this.frequency = frequency;
         this.beam_width = beam_width;
+        this.beam_width_vel = beam_width_vel;
         this.distance_travelled = distance_travelled;
         this.elevation = elevation;
         this.azimuth = azimuth;
@@ -421,16 +422,18 @@ public class Pulse
         velocity.Y = -velocity.Y;
     }
     
-    public void Collided_Target(Aircraft aircraft)
+    public void Collided_Target(Aircraft target)
     {
         this.velocity.X = -this.velocity.X;
         this.velocity.Y = -this.velocity.Y;
+        this.position.X = target.position.X;
+        this.position.Y = target.position.Y;
         this.beam_width = 0;
-        double temp_val = aircraft.RadarCrossSection[(int)this.frequency][(int)(aircraft.heading - this.azimuth)];
+        double temp_val = target.RadarCrossSection[(int)this.frequency][(int)(target.heading - this.azimuth)];
         this.energy = this.energy * (temp_val) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
         this.azimuth += 180;
         this.distance_travelled = 0;
-        for(int j=0; j<2; j++)
+        for (int j=0; j<3; j++)
         {
             this.Move();
         }
@@ -446,7 +449,7 @@ public class Pulse
        double time_diff = tick-latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
-        double target_x_coordinate = rb.position.X + 9 + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
+        double target_x_coordinate = rb.position.X + 7.5 + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
         double target_y_coordinate = rb.position.Y+ (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
             
         double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
