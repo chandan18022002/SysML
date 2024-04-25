@@ -429,11 +429,19 @@ public class Pulse
         this.position.X = target.position.X;
         this.position.Y = target.position.Y;
         this.beam_width = 0;
-        double temp_val = target.RadarCrossSection[(int)this.frequency][(int)(target.heading - this.azimuth)];
+        int temp_azimuth = (int)(target.heading - this.azimuth);
+        while(temp_azimuth < 0) {
+            temp_azimuth += 360;
+        }
+        if (temp_azimuth > 360)
+        {
+            temp_azimuth = temp_azimuth % 360;
+        }
+        double temp_val = target.RadarCrossSection[(int)this.frequency][temp_azimuth];
         this.energy = this.energy * (temp_val) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
         this.azimuth += 180;
         this.distance_travelled = 0;
-        for (int j=0; j<3; j++)
+        for (int j=0; j<5; j++)
         {
             this.Move();
         }
@@ -444,16 +452,19 @@ public class Pulse
     {
         return degrees * (Math.PI / 180);
     }
-
-
-    public  void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb,Pulsed_radar pradar)
+    public double CalculateDistance(RadarBase radarbase)
     {
-       double time_diff = tick-latest_radar_transmit_tick;
+        return Math.Sqrt(Math.Pow(radarbase.position.X - this.position.X, 2) + Math.Pow(radarbase.position.Y - this.position.Y, 2));
+    }
+
+    public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
+    {
+        double time_diff = tick - latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
         double target_x_coordinate = rb.position.X + 7.5 + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
-        double target_y_coordinate = rb.position.Y+ (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
-            
+        double target_y_coordinate = rb.position.Y + (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
+
         double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
         this.energy = this.energy * (pradar.Gain_table[(int)frequency][(int)(this.azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
 
@@ -462,9 +473,25 @@ public class Pulse
         Console.WriteLine("Pulse's recieved energy: " + this.energy);
 
 
+        double temp_distance = CalculateDistance(rb);
+        double temp_x1 = position.X + (temp_distance * Math.Cos(DegreesToRadians(90)));
+        double temp_y1 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(90)));
+        double temp_x2 = position.X + (temp_distance * Math.Cos(DegreesToRadians(-90)));
+        double temp_y2 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(-90)));
+
+        double distanceToTemp1 = Math.Sqrt(Math.Pow(temp_x1 - rb.position.X, 2) + Math.Pow(temp_y1 - rb.position.Y, 2));
+        double distanceToTemp2 = Math.Sqrt(Math.Pow(temp_x2 - rb.position.X, 2) + Math.Pow(temp_y2 - rb.position.Y, 2));
+
+        if (distanceToTemp1 < distanceToTemp2)
+        {
+            pradar.azimuth -= temp_distance * 0.1;
+        }
+        else
+        {
+            pradar.azimuth += temp_distance * 0.1;
+        }
 
     }
-
 }
 
     public class Wepons : BattleSystem
