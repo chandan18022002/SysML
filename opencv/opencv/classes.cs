@@ -437,6 +437,8 @@ public class Pulse
         {
             this.Move();
         }
+
+
     }
     static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)
     {
@@ -458,6 +460,9 @@ public class Pulse
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
         Console.WriteLine("Pulse's recieved energy: " + this.energy);
+
+
+
     }
 
 }

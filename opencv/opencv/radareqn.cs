@@ -161,7 +161,7 @@ class radareqn
             tick += 1;
                 
             CvInvoke.Imshow("Visual", image_visual);
-            CvInvoke.Imshow("actual", image_actual);
+            //CvInvoke.Imshow("actual", image_actual);
             //Console.WriteLine(tick);
             int key = CvInvoke.WaitKey(10);
 
