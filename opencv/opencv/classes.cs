@@ -457,7 +457,7 @@ public class Pulse
         this.energy = this.energy * (temp_val) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
         this.azimuth += 180;
         this.distance_travelled = 0;
-        for (int j=0; j<5; j++)
+        for (int j=0; j<11; j++)
         {
             this.Move();
         }
@@ -473,12 +473,12 @@ public class Pulse
         return Math.Sqrt(Math.Pow(radarbase.position.X - this.position.X, 2) + Math.Pow(radarbase.position.Y - this.position.Y, 2));
     }
 
-    public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
+    public double Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
     {
-        double time_diff = tick - latest_radar_transmit_tick;
+        double time_diff = tick +20 - latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
         //Target x coordinate = radar_base’s x coordinate + (target_distance * cosine (radar.azimuth)
-        double target_x_coordinate = rb.position.X + 7.5 + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
+        double target_x_coordinate = rb.position.X + (target_distance * Math.Cos(DegreesToRadians(pradar.azimuth)));
         double target_y_coordinate = rb.position.Y + (target_distance * Math.Sin(DegreesToRadians(pradar.azimuth)));
 
         double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
@@ -486,29 +486,33 @@ public class Pulse
 
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
-        Console.WriteLine("Pulse's recieved energy: " + this.energy);
+        //Console.Write("before : " + pradar.azimuth);
+        //Console.WriteLine("Pulse's recieved energy: " + this.energy);
 
 
         double temp_distance = CalculateDistance(rb);
         if (temp_distance > 0)
         {
-            double temp_x1 = position.X + (temp_distance * Math.Cos(DegreesToRadians(90)));
-            double temp_y1 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(90)));
-            double temp_x2 = position.X + (temp_distance * Math.Cos(DegreesToRadians(-90)));
-            double temp_y2 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(-90)));
+            double temp_x1 = position.X + (temp_distance * Math.Cos(DegreesToRadians(pradar.azimuth + 90)));
+            double temp_y1 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(pradar.azimuth + 90)));
+            double temp_x2 = position.X + (temp_distance * Math.Cos(DegreesToRadians(pradar.azimuth - 90)));
+            double temp_y2 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(pradar.azimuth - 90)));
 
             double distanceToTemp1 = Math.Sqrt(Math.Pow(temp_x1 - rb.position.X, 2) + Math.Pow(temp_y1 - rb.position.Y, 2));
             double distanceToTemp2 = Math.Sqrt(Math.Pow(temp_x2 - rb.position.X, 2) + Math.Pow(temp_y2 - rb.position.Y, 2));
-
+            //Console.Write(", delta : " + Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI));
             if (distanceToTemp1 < distanceToTemp2)
             {
-                pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled);
+                pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled) * (180/ Math.PI);
             }
             else
             {
-                pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled);
+                pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
             }
         }
+        //Console.WriteLine(", after : " + pradar.azimuth);
+        Console.WriteLine("------------------------------------------------------------");
+        return pradar.azimuth;
     }
 }
 

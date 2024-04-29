@@ -31,7 +31,7 @@ class radareqn
         pulse_radar_list.Add(pulse_radar);
 
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft("0", .01, 1, [new Vector(600, 300), new Vector(500, 500), new Vector(500, 100)], []);
+        Aircraft aircraft = new Aircraft("0", .01, 1, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
         aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
 
 
@@ -52,10 +52,10 @@ class radareqn
                 //Red Pulse
                 int currentKey = pulse_dictionary.Keys.ElementAt(i);
                 Pulse pulse = pulse_dictionary[currentKey];
-                int x1 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(90))));
-                int y1 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(90))));
-                int x2 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(-90))));
-                int y2 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(-90))));
+                int x1 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(pulse.azimuth + 90))));
+                int y1 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(pulse.azimuth + 90))));
+                int x2 = (int)(pulse.position.X + (pulse.beam_width * Math.Cos(DegreesToRadians(pulse.azimuth - 90))));
+                int y2 = (int)(pulse.position.Y + (pulse.beam_width * Math.Sin(DegreesToRadians(pulse.azimuth - 90))));
                 CvInvoke.Line(image_actual, new Point(x1, y1), new Point(x2, y2), new MCvScalar(currentKey, 0, 255), 3);
                 CvInvoke.Line(image_visual, new Point(x1, y1), new Point(x2, y2), new MCvScalar(currentKey, 0, 255), 3);
                 //CvInvoke.Circle(image_visual, new Point((int)pulse.position.X, (int)pulse.position.Y), 3, new MCvScalar(currentKey, 0, 255), -1);
@@ -78,6 +78,7 @@ class radareqn
                 }
                 //Green Aircraft
                 aircraftlist[i].MovePlatform();
+                CvInvoke.PutText(image_visual, Math.Round(aircraftlist[i].position.X, 2).ToString()+","+ Math.Round(aircraftlist[i].position.Y, 2).ToString(), new Point((int)aircraftlist[i].position.X+10, (int)aircraftlist[i].position.Y+10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
             }
             //Trigger pulse.collided_radar(tick, latest_radar_transmit_tick,radar.host_platform,radar) function
@@ -95,7 +96,7 @@ class radareqn
                     if (pulse_dictionary.ContainsKey(pul_index))
                     {
                         Pulse pulse = pulse_dictionary[pul_index];
-                        pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
+                        pulse_radar_list[i].azimuth=pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
                         pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
                     } 
                     pulse_dictionary.Remove(i);
@@ -112,8 +113,8 @@ class radareqn
                     //create a pulse
                     pul_index = current_pulse_id; ;
                     double temp_velocity = 4;
-                    double vel_x = temp_velocity * Math.Cos(DegreesToRadians((((Radar)radarbase.onboardSensor[0]).azimuth)));
-                    double vel_y = temp_velocity * Math.Sin(DegreesToRadians(((Radar)radarbase.onboardSensor[0]).azimuth));
+                    double vel_x = temp_velocity * Math.Cos(DegreesToRadians((pulse_radar_list[i].azimuth)));
+                    double vel_y = temp_velocity * Math.Sin(DegreesToRadians((pulse_radar_list[i].azimuth)));
 
 
                     //creating pulse                                                                                                                          
@@ -136,13 +137,13 @@ class radareqn
                         pulse_radar_list[i].Pwd,
                         pulse_radar_list[i].frequency,
                         0.0,
-                        0.05* temp_velocity,
+                        0.08* temp_velocity,
                         0.0,
                         0.0,
                         pulse_radar_list[i].azimuth
                     );
 
-                    for (int j = 0; j < 10; j++)
+                    for (int j = 0; j < 11; j++)
                     {
                         pulse.Move();
                     }
@@ -157,7 +158,7 @@ class radareqn
                     }
                 }
                 //RADAR
-                CvInvoke.PutText(image_visual, Math.Round(pulse_radar_list[i].azimuth,2).ToString(), new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
+                //CvInvoke.PutText(image_visual, Math.Round(pulse_radar_list[i].azimuth,2).ToString(), new Point((int)radarbaselist[i].position.X+10, (int)radarbaselist[i].position.Y+10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), 3, new MCvScalar(255, 0, 0), -1);
             }
             
