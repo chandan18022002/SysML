@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {}
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
         "projectName": "opencv",
-        "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
-        "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+        "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\chand\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

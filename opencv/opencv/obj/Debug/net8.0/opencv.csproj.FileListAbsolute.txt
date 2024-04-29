@@ -200,3 +200,4 @@ C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\opencv\obj\Debug\net8.0\op
 C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\opencv\obj\Debug\net8.0\opencv.genruntimeconfig.cache
 C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\opencv\obj\Debug\net8.0\ref\opencv.dll
 C:\Users\chand\Source\Repos\rohitchaoji\SysML\opencv\opencv\bin\Debug\net8.0\Emgu.CV.Bitmap.dll
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\opencv\bin\Debug\net8.0\Emgu.CV.Bitmap.dll
