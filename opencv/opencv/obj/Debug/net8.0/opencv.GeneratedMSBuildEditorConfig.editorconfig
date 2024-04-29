@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = opencv
-build_property.ProjectDir = C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\opencv\
+build_property.ProjectDir = C:\Users\chand\Source\Repos\rohitchaoji\SysML\opencv\opencv\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

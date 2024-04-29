@@ -21,6 +21,23 @@
           }
         }
       },
+      "Emgu.CV.Bitmap/4.8.1.5350": {
+        "type": "package",
+        "dependencies": {
+          "Emgu.CV": "4.8.1.5350",
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Emgu.CV.Bitmap.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Emgu.CV.Bitmap.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Emgu.CV.runtime.windows/4.8.1.5350": {
         "type": "package",
         "dependencies": {
@@ -764,6 +781,22 @@
         "lib/netstandard2.0/Emgu.CV.xml",
         "lib/xamarinios10/Emgu.CV.dll",
         "lib/xamarinios10/Emgu.CV.xml"
+      ]
+    },
+    "Emgu.CV.Bitmap/4.8.1.5350": {
+      "sha512": "MnvA50+fkuBIzpSgZHL/OxuGMvJa30y26cpXU1AxbWlVBEhCzvfHJY/9pIAyFbTgIyqjirDG2vols/hMpsRKXw==",
+      "type": "package",
+      "path": "emgu.cv.bitmap/4.8.1.5350",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "docs/README.md",
+        "emgu.cv.bitmap.4.8.1.5350.nupkg.sha512",
+        "emgu.cv.bitmap.nuspec",
+        "lib/netstandard2.0/Emgu.CV.Bitmap.dll",
+        "lib/netstandard2.0/Emgu.CV.Bitmap.xml",
+        "nuget_icon.png"
       ]
     },
     "Emgu.CV.runtime.windows/4.8.1.5350": {
@@ -2953,25 +2986,31 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Emgu.CV >= 4.8.1.5350",
+      "Emgu.CV.Bitmap >= 4.8.1.5350",
       "Emgu.CV.runtime.windows >= 4.8.1.5350",
       "LanguageExt.Core >= 4.4.8",
       "System.Drawing.Common >= 8.0.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pinaka\\.nuget\\packages\\": {}
+    "C:\\Users\\chand\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
       "projectName": "opencv",
-      "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
-      "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
+      "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+      "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chand\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3006,6 +3045,10 @@
             "target": "Package",
             "version": "[4.8.1.5350, )"
           },
+          "Emgu.CV.Bitmap": {
+            "target": "Package",
+            "version": "[4.8.1.5350, )"
+          },
           "Emgu.CV.runtime.windows": {
             "target": "Package",
             "version": "[4.8.1.5350, )"
@@ -3035,7 +3078,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

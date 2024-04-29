@@ -9,6 +9,7 @@
       "opencv/1.0.0": {
         "dependencies": {
           "Emgu.CV": "4.8.1.5350",
+          "Emgu.CV.Bitmap": "4.8.1.5350",
           "Emgu.CV.runtime.windows": "4.8.1.5350",
           "LanguageExt.Core": "4.4.8",
           "System.Drawing.Common": "8.0.4"
@@ -26,6 +27,18 @@
         },
         "runtime": {
           "lib/netstandard2.0/Emgu.CV.dll": {
+            "assemblyVersion": "4.8.1.5350",
+            "fileVersion": "4.8.1.5350"
+          }
+        }
+      },
+      "Emgu.CV.Bitmap/4.8.1.5350": {
+        "dependencies": {
+          "Emgu.CV": "4.8.1.5350",
+          "System.Drawing.Common": "8.0.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Emgu.CV.Bitmap.dll": {
             "assemblyVersion": "4.8.1.5350",
             "fileVersion": "4.8.1.5350"
           }
@@ -481,6 +494,13 @@
       "sha512": "sha512-1jOw9vu3z6uPEF3Z6ubDIYSrIYrv0h+ABINypNKEtKixMKU0ckUFsiX1AKXFE+kBz9vVFKXRVl94B1Mrf23tVA==",
       "path": "emgu.cv/4.8.1.5350",
       "hashPath": "emgu.cv.4.8.1.5350.nupkg.sha512"
+    },
+    "Emgu.CV.Bitmap/4.8.1.5350": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MnvA50+fkuBIzpSgZHL/OxuGMvJa30y26cpXU1AxbWlVBEhCzvfHJY/9pIAyFbTgIyqjirDG2vols/hMpsRKXw==",
+      "path": "emgu.cv.bitmap/4.8.1.5350",
+      "hashPath": "emgu.cv.bitmap.4.8.1.5350.nupkg.sha512"
     },
     "Emgu.CV.runtime.windows/4.8.1.5350": {
       "type": "package",

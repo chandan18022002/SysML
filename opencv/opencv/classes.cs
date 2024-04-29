@@ -27,25 +27,42 @@ public class Platform : BattleSystem
     public Vector position;
     public double speed;
     public double heading;
-    public List<Waypoint> waypoints;
+    public List<Vector> waypoints;
+    public int next_waypoint=1;
     public List<Sensor> onboardSensor;
     public Dictionary<double, double[]> RadarCrossSection;
 
-    public Platform(string id, Vector position, double speed, double heading, List<Waypoint> waypoints, List<Sensor> OnBoardsensor) 
+    public Platform(string id, double speed, double heading, List<Vector> waypoints, List<Sensor> OnBoardsensor) 
         : base(id)
     {
-        this.position = position;
         this.speed = speed;
         this.heading = heading;
         this.waypoints = waypoints;
+        this.position = waypoints[0];
         this.onboardSensor = OnBoardsensor;
         RadarCrossSection = CreateRadarCrossSection();
     }
 
     public void MovePlatform()
     {
-        // Implement logic for moving the platform based on speed, heading, and waypoints
-        Console.WriteLine("Platform is moving!");
+        if (waypoints.Count > 1)
+        {
+            double dis = Math.Sqrt(Math.Pow((this.position.X - this.waypoints[this.next_waypoint].X),2)+ Math.Pow((this.position.Y - this.waypoints[this.next_waypoint].Y), 2));
+            if(dis > this.speed)
+            {
+                this.position.X += this.speed * (this.waypoints[this.next_waypoint].X - this.position.X) / dis;
+                this.position.Y += this.speed * (this.waypoints[this.next_waypoint].Y - this.position.Y) / dis;
+                this.heading = Math.Acos((this.waypoints[this.next_waypoint].X - this.position.X) / dis);
+            }
+            else
+            {
+                this.next_waypoint += 1;
+                if(this.next_waypoint >= waypoints.Count)
+                {
+                    this.next_waypoint = 0;
+                }
+            }
+        }
     }
 
     public Dictionary<double, double[]> CreateRadarCrossSection()
@@ -331,8 +348,8 @@ public class Aircraft : Platform
     {
         return id;
     }
-    public Aircraft(string id, Vector position, double Speed, double Heading, List<Waypoint> Waypoints, List<Sensor> OnboardSensor /*,double radar_cross_section*/) 
-        : base(id, position, Speed, Heading, Waypoints, OnboardSensor)
+    public Aircraft(string id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor /*,double radar_cross_section*/) 
+        : base(id, Speed, Heading, Waypoints, OnboardSensor)
     {
 
 
@@ -358,8 +375,8 @@ public class RadarBase : Platform
     {
         return id;
     }
-    public RadarBase(string id, Vector position, double Speed, double Heading, List<Waypoint> Waypoints, List<Sensor> OnboardSensor) 
-        : base(id, position, Speed, Heading, Waypoints, OnboardSensor)
+    public RadarBase(string id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor) 
+        : base(id, Speed, Heading, Waypoints, OnboardSensor)
     {
 
     }
@@ -399,7 +416,6 @@ public class Pulse
         this.frequency = frequency;
         this.beam_width = beam_width;
         this.beam_width_vel = beam_width_vel;
-        this.distance_travelled = distance_travelled;
         this.elevation = elevation;
         this.azimuth = azimuth;
        
@@ -474,23 +490,25 @@ public class Pulse
 
 
         double temp_distance = CalculateDistance(rb);
-        double temp_x1 = position.X + (temp_distance * Math.Cos(DegreesToRadians(90)));
-        double temp_y1 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(90)));
-        double temp_x2 = position.X + (temp_distance * Math.Cos(DegreesToRadians(-90)));
-        double temp_y2 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(-90)));
-
-        double distanceToTemp1 = Math.Sqrt(Math.Pow(temp_x1 - rb.position.X, 2) + Math.Pow(temp_y1 - rb.position.Y, 2));
-        double distanceToTemp2 = Math.Sqrt(Math.Pow(temp_x2 - rb.position.X, 2) + Math.Pow(temp_y2 - rb.position.Y, 2));
-
-        if (distanceToTemp1 < distanceToTemp2)
+        if (temp_distance > 0)
         {
-            pradar.azimuth -= temp_distance * 0.1;
-        }
-        else
-        {
-            pradar.azimuth += temp_distance * 0.1;
-        }
+            double temp_x1 = position.X + (temp_distance * Math.Cos(DegreesToRadians(90)));
+            double temp_y1 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(90)));
+            double temp_x2 = position.X + (temp_distance * Math.Cos(DegreesToRadians(-90)));
+            double temp_y2 = position.Y + (temp_distance * Math.Sin(DegreesToRadians(-90)));
 
+            double distanceToTemp1 = Math.Sqrt(Math.Pow(temp_x1 - rb.position.X, 2) + Math.Pow(temp_y1 - rb.position.Y, 2));
+            double distanceToTemp2 = Math.Sqrt(Math.Pow(temp_x2 - rb.position.X, 2) + Math.Pow(temp_y2 - rb.position.Y, 2));
+
+            if (distanceToTemp1 < distanceToTemp2)
+            {
+                pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled);
+            }
+            else
+            {
+                pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled);
+            }
+        }
     }
 }
 
