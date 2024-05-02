@@ -163,8 +163,8 @@ public class Radar : Sensor
     public string antenna;
     public string modulation;
     public double elevation;
-    public    double azimuth;
-    public   double frequency;
+    public  double azimuth;
+    public  double frequency;
     public int pri; // Pulse Repetition Interval
     public double pwd; // Pulse Width Duration
     public string antenna_scan_pattern;
@@ -492,8 +492,9 @@ public class Pulse
 
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
-        //Console.Write("before : " + pradar.azimuth);
-        //Console.WriteLine("Pulse's recieved energy: " + this.energy);
+        pradar.UpdateLatestTargetCoordinates(position.X, position.Y, tick);
+        // Console.Write(pradar.latest_five_target_coordinates);
+        Console.WriteLine("Latest Five Target Coordinates: " + string.Join(", ", pradar.latest_five_target_coordinates));
 
 
         double temp_distance = CalculateDistance(rb);
