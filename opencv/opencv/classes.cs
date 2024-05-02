@@ -10,13 +10,14 @@ namespace radar;    // im giving this namespace name as radar
 
 public abstract class BattleSystem
 {
-    protected BattleSystem(string id)
+ 
+    public BattleSystem(int id)
     {
-        Id = id;
+        this.Id = id;
     }
-    public string Id;
-    public abstract void Set(string id);
-    public abstract string Get();
+    public int Id;
+    public abstract void Set(int id);
+    public abstract int Get();
 
     // Abstract method for OnTick
     public abstract void OnTick();
@@ -32,7 +33,7 @@ public class Platform : BattleSystem
     public List<Sensor> onboardSensor;
     public Dictionary<double, double[]> RadarCrossSection;
 
-    public Platform(string id, double speed, double heading, List<Vector> waypoints, List<Sensor> OnBoardsensor) 
+    public Platform(int id, double speed, double heading, List<Vector> waypoints, List<Sensor> OnBoardsensor) 
         : base(id)
     {
         this.speed = speed;
@@ -84,12 +85,12 @@ public class Platform : BattleSystem
     }
 
 
-    public override void Set(string id)
+    public override void Set(int  id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -127,7 +128,7 @@ public class Waypoint
 public class Sensor : BattleSystem
 {
     public Platform hostPlatform;
-    public Sensor(string id, Platform platform) : base(id)
+    public Sensor(int id, Platform platform) : base(id)
     {
         this.hostPlatform = platform;
     }
@@ -139,12 +140,12 @@ public class Sensor : BattleSystem
         return new List<object>(); // Placeholder, replace with actual detected objects
     }
 
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -178,7 +179,7 @@ public class Radar : Sensor
     public Dictionary<double, double[]> Gain_table;
     public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
-    public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
+    public Radar(int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)
     {
 
@@ -258,7 +259,7 @@ public class Pulsed_radar : Radar
     public double prf;
     public double peak_transmission_power;
 
-    public Pulsed_radar (string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range,  double peak_transmission_power) 
+    public Pulsed_radar (int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range,  double peak_transmission_power) 
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     
     {
@@ -268,12 +269,12 @@ public class Pulsed_radar : Radar
         this.peak_transmission_power = peak_transmission_power;
 
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -289,18 +290,18 @@ public class Continous_wave : Radar
 {
     public double TransmittedFrequency;
     public double ReceivedFrequency;
-    public Continous_wave(string id, Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
+    public Continous_wave(int id, Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
           : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
         this.TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
         this.ReceivedFrequency = received_frequency; // Initialize Received Frequency
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int  Get()
     {
         return Id;
     }
@@ -316,17 +317,17 @@ public class Continous_wave : Radar
 public class Pulse_Doppler : Radar
 {
 
-    public Pulse_Doppler(string id, Platform platform, string operatingMode,string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern,double detection_range,double detectability_range,double resolution_cell, double minimum_range,double  max_unamb_range) /*List<List<double>> Gain_table*/
+    public Pulse_Doppler(int id, Platform platform, string operatingMode,string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern,double detection_range,double detectability_range,double resolution_cell, double minimum_range,double  max_unamb_range) /*List<List<double>> Gain_table*/
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     { 
 
     }
-public override void Set(string id)
+public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -345,16 +346,16 @@ public class Aircraft : Platform
 {
     private string id;
 
-    public override void Set(string id)
+    public override void Set(int id)
     {
-        this.id = id;
+        this.Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
-        return id;
+        return Id;
     }
-    public Aircraft(string id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor /*,double radar_cross_section*/) 
+    public Aircraft(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor /*,double radar_cross_section*/) 
         : base(id, Speed, Heading, Waypoints, OnboardSensor)
     {
 
@@ -372,16 +373,16 @@ public class RadarBase : Platform
     public string id;
 
 
-    public override void Set(string id)
+    public override void Set(int id)
     {
-        this.id = id;
+        this.Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
-        return id;
+        return Id;
     }
-    public RadarBase(string id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor) 
+    public RadarBase(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor) 
         : base(id, Speed, Heading, Waypoints, OnboardSensor)
     {
 
@@ -492,7 +493,7 @@ public class Pulse
 
         Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
         Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
-        pradar.UpdateLatestTargetCoordinates(position.X, position.Y, tick);
+        pradar.UpdateLatestTargetCoordinates(position.X, position.Y, latest_radar_transmit_tick);
         // Console.Write(pradar.latest_five_target_coordinates);
         Console.WriteLine("Latest Five Target Coordinates: " + string.Join(", ", pradar.latest_five_target_coordinates));
 
@@ -526,18 +527,18 @@ public class Pulse
     public class Wepons : BattleSystem
 {
     public Platform HostPlatform;
-    public Wepons(string id, Platform platform) : base(id)
+    public Wepons(int  id, Platform platform) : base(id)
     {
       this.HostPlatform = platform;
     }
 
 
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -553,9 +554,9 @@ public class Guns : Wepons
     public string id;
     public double elivation;
     public double azimuth;
-    public Guns(string id, Platform platform, double Elivation, double Azimuth) : base(id, platform)
+    public Guns(int id, Platform platform, double Elivation, double Azimuth) : base(id, platform)
     {
-       this. Id = id;
+       this.Id = id;
        this. elivation = Elivation;
         azimuth = Azimuth;
     }
@@ -568,19 +569,24 @@ public class Missiles : Wepons
     public double speed;
     public double heading;
     public List<Waypoint> waypoints;
-    public Missiles(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform)
+    public bool released;
+    public Vector target_coordinates;
+    public Missiles(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints,bool released,Vector target_coardinates)
+        : base(id, platform)
     {
       this.position = position;
       this. speed = speed;
       this. heading = heading;
       this.waypoints = waypoints;
+      this.released = released;
+      this.target_coordinates = target_coardinates;
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -594,16 +600,16 @@ public class Missiles : Wepons
 public class AAA : Guns
 {
     public double shell_fuses_delay;
-    public AAA(string id, Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
+    public AAA(int id, Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
     {
        this. shell_fuses_delay = shell_fuses_delay;
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -616,18 +622,19 @@ public class AAA : Guns
 }
 public class Radar_guided : Missiles
 {
+ 
 
-    public Radar_guided(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
+    public Radar_guided(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints,bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints,released,target_coardinates)
 
     {
 
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -641,17 +648,17 @@ public class Radar_guided : Missiles
 public class Active_guider : Missiles
 {
     double onboard_radar;
-    public Active_guider(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar) : base(id, platform, position, speed, heading, waypoints)
+    public Active_guider(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints,released,target_coardinates)
 
     {
        this. onboard_radar = onboard_radar;
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override  int Get()
     {
         return Id;
     }
@@ -665,17 +672,17 @@ public class Active_guider : Missiles
 public class Image_guidence : Missiles
 {
     double onboard__image_sensor;
-    public Image_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor) : base(id, platform, position, speed, heading, waypoints)
+    public Image_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
       this.onboard__image_sensor = onboard_image_sensor;
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
-        Id = id;
+        this.Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -689,17 +696,17 @@ public class Image_guidence : Missiles
 public class Gps_guidence : Missiles
 {
 
-    public Gps_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
+    public Gps_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -713,17 +720,17 @@ public class Gps_guidence : Missiles
 public class Semiacive_guidence : Missiles
 {
     double onboard_receiver;
-    public Semiacive_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver) : base(id, platform, position, speed, heading, waypoints)
+    public Semiacive_guidence(int  id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
        this. onboard_receiver = onboard_receiver;
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -737,17 +744,17 @@ public class Semiacive_guidence : Missiles
 public class Passive_guidence : Missiles
 {
 
-    public Passive_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
+    public Passive_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
     }
-    public override void Set(string id)
+    public override void Set(int  id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int  Get()
     {
         return Id;
     }
@@ -761,18 +768,18 @@ public class Passive_guidence : Missiles
 public class Terrian_following_guidence : Missiles
 {
 
-    public Terrian_following_guidence(string id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints) : base(id, platform, position, speed, heading, waypoints)
+    public Terrian_following_guidence(int  id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     { 
 
 
     }
-    public override void Set(string id)
+    public override void Set(int id)
     {
         Id = id;
     }
 
-    public override string Get()
+    public override int Get()
     {
         return Id;
     }
@@ -791,7 +798,7 @@ public class Esn :Sensor
     public double antenna_configaration;
     public double reception_band;
 
-    public Esn(string id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
+    public Esn(int  id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
          : base(id, platform)
     {
         this.no_of_antenna = no_of_antenna;
@@ -821,7 +828,7 @@ public class Rwr : Sensor
     public double antenna_configaration;
     public double reception_band;
 
-    public Rwr(string id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
+    public Rwr(int id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
          : base(id, platform)
     {
        this. no_of_antenna = no_of_antenna;

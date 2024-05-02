@@ -7,7 +7,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using radar;         // here im using radar namespace of other ( claseses) file 
 
-class radareqn
+class missile
 {
     static void Main(string[] args)
     {
@@ -19,6 +19,8 @@ class radareqn
 
         //Dictionary of the pulse
         Dictionary<int, Pulse> pulse_dictionary = new Dictionary<int, Pulse>();
+        Dictionary<int, Missiles> missile_dictionary = new Dictionary<int, Missiles>();
+       
         // RADAR BASE class initialsization
 
         RadarBase radarbase = new RadarBase(0, 0, 0, [new Vector(100, 300)], []);
@@ -26,13 +28,22 @@ class radareqn
 
 
         //radAR  class initialsization
-        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
+        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 500, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
         pulse_radar_list.Add(pulse_radar);
 
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft(0, .01, 1, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
+        Aircraft aircraft = new Aircraft(0, .1, 0, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
         aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
+
+        Aircraft aircraft1 = new Aircraft(1, .1, 0, [new Vector(100,100)], []);
+        aircraftlist.Add(aircraft1);
+
+        Radar_guided rdr_guided = new Radar_guided(1, aircraftlist[1], aircraftlist[1].position, 0.05, 0.0, [], true, aircraftlist[1].position);
+        //missile_dictionary.Add(rdr_guided);
+        int mis_id =rdr_guided.Id;
+        missile_dictionary.Add(mis_id, rdr_guided);
+        
 
 
         int tick = 0;
@@ -46,6 +57,9 @@ class radareqn
 
             Mat image_actual = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
             image_actual.SetTo(new Bgr(0, 0, 0).MCvScalar);
+
+            Mat image_missile = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
+            image_missile.SetTo(new Bgr(0, 0, 0).MCvScalar);
 
             for (int i = pulse_dictionary.Count - 1; i >= 0; i--)
             {
@@ -78,12 +92,39 @@ class radareqn
                 }
                 //Green Aircraft
                 aircraftlist[i].MovePlatform();
-                CvInvoke.PutText(image_visual, Math.Round(aircraftlist[i].position.X, 2).ToString()+","+ Math.Round(aircraftlist[i].position.Y, 2).ToString(), new Point((int)aircraftlist[i].position.X+10, (int)aircraftlist[i].position.Y+10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
+                CvInvoke.PutText(image_visual, Math.Round(aircraftlist[i].position.X, 2).ToString() + "," + Math.Round(aircraftlist[i].position.Y, 2).ToString(), new Point((int)aircraftlist[i].position.X + 10, (int)aircraftlist[i].position.Y + 10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
-            }
-            //Trigger pulse.collided_radar(tick, latest_radar_transmit_tick,radar.host_platform,radar) function
+                CvInvoke.Circle(image_missile, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
 
-            for (int i = pulse_radar_list.Count - 1; i >= 0; i--)
+            }
+            for (int i = missile_dictionary.Count - 1; i >= 0; i--)
+            {
+                Bgr actual_pixelValue = GetPixelBgr(image_missile, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
+                if (actual_pixelValue.Green == 255)
+                {
+                    mis_id = (int)actual_pixelValue.Blue;
+                    if (missile_dictionary.ContainsKey(mis_id))
+                    {
+                        Aircraft air = aircraftlist[mis_id];
+                        //print(missile of id - {it’s id} has collided with an aircraft of id - {it’s id} )
+                        //pulse.Collided_Target(aircraft.heading, RadarCrossSection);
+                        Console.WriteLine($"Missile of id - {mis_id} has collided with an aircraft of id - {aircraftlist[i].Id}");
+                        aircraftlist.Remove(aircraftlist[i]);
+                        missile_dictionary.Remove(mis_id);
+                        
+                    }
+                    missile_dictionary.Remove(i);
+                }
+
+
+                CvInvoke.Circle(image_visual, new Point((int)missile_dictionary[i].position.X, (int)missile_dictionary[i].position.Y), 3, new MCvScalar(0, 255, 255), -1);
+                //CvInvoke.Crcle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
+            }
+
+
+              
+
+                for (int i = pulse_radar_list.Count - 1; i >= 0; i--)
             {
                 RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].hostPlatform));
                 Bgr actual_pixelValue_0 = GetPixelBgr(image_actual, (int)current_radarbase.position.X, (int)current_radarbase.position.Y);
@@ -96,9 +137,18 @@ class radareqn
                     if (pulse_dictionary.ContainsKey(pul_index))
                     {
                         Pulse pulse = pulse_dictionary[pul_index];
-                        pulse_radar_list[i].azimuth=pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
-                        pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
-                    } 
+
+
+
+                        pulse_radar_list[i].azimuth= pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
+                        for (int j = missile_dictionary.Count - 1; j >= 0; i--)
+                        {
+                           Vector target_pos = missile_dictionary[j].target_coordinates;
+                        }
+                            pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
+
+
+                    }
                     pulse_dictionary.Remove(i);
                 }
                 //RadarBase current_radar__base = pulse_radar_list[i];
@@ -123,7 +173,7 @@ class radareqn
                     //  ( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
                     //pulse position should be rdar position so it achieve by .x and .y individually 
                     // pulse_radar.frequency convert to index
-                  
+
 
                     double power = pulse_radar_list[i].peak_transmission_power * pulse_radar_list[i].Gain_table[pulse_radar_list[i].frequency][0];     //36 beacause it is index value of 18.5 frequency
                     //int powerInt = (int)power; // Convert double to int, truncating any fractional part
@@ -137,7 +187,7 @@ class radareqn
                         pulse_radar_list[i].Pwd,
                         pulse_radar_list[i].frequency,
                         0.0,
-                        0.08* temp_velocity,
+                        0.08 * temp_velocity,
                         0.0,
                         0.0,
                         pulse_radar_list[i].azimuth
@@ -161,10 +211,10 @@ class radareqn
                 //CvInvoke.PutText(image_visual, Math.Round(pulse_radar_list[i].azimuth,2).ToString(), new Point((int)radarbaselist[i].position.X+10, (int)radarbaselist[i].position.Y+10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), 3, new MCvScalar(255, 0, 0), -1);
             }
-            
-            
+
+
             tick += 1;
-                
+
             CvInvoke.Imshow("Visual", image_visual);
             //CvInvoke.Imshow("actual", image_actual);
             //Console.WriteLine(tick);
@@ -186,33 +236,34 @@ class radareqn
     }
 
     static Bgr GetPixelValue(Mat image, int x, int y)
-        {
-            // Get the data pointer for the image
-            IntPtr ptr = image.DataPointer;
+    {
+        // Get the data pointer for the image
+        IntPtr ptr = image.DataPointer;
 
-            // Calculate the byte index corresponding to the pixel at (x, y)
-            int pixelSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Bgr));
-            int step = image.Step;
-            int byteIndex = y * step + x * pixelSize;
+        // Calculate the byte index corresponding to the pixel at (x, y)
+        int pixelSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Bgr));
+        int step = image.Step;
+        int byteIndex = y * step + x * pixelSize;
 
-            // Read the BGR values from the image data
-            byte blue = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex);
-            byte green = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex + 1);
-            byte red = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex + 2);
+        // Read the BGR values from the image data
+        byte blue = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex);
+        byte green = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex + 1);
+        byte red = System.Runtime.InteropServices.Marshal.ReadByte(ptr, byteIndex + 2);
 
-            // Create a Bgr structure with the pixel values
-            return new Bgr(blue, green, red);
-        }
-        static Bgr GetPixelBgr(Mat image, int x, int y)
-        {
-            // Access the BGR values of the pixel at the specified coordinates
-            Image<Bgr, byte> img = image.ToImage<Bgr, byte>();
-            return img[y, x];
-        }
+        // Create a Bgr structure with the pixel values
+        return new Bgr(blue, green, red);
+    }
+    static Bgr GetPixelBgr(Mat image, int x, int y)
+    {
+        // Access the BGR values of the pixel at the specified coordinates
+        Image<Bgr, byte> img = image.ToImage<Bgr, byte>();
+        return img[y, x];
+    }
 
 
-     
+
 }
+
 
 
 
