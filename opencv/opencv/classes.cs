@@ -176,7 +176,7 @@ public class Radar : Sensor
     public double max_Unambiguous_Range; 
    
     public Dictionary<double, double[]> Gain_table;
-    private int resolution_cell;
+    public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
     public Radar(string id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)
@@ -194,12 +194,11 @@ public class Radar : Sensor
         this. detected = new List<object>();
         this. detection_Range = detection_range;
         this. detectability_Range = detectability_range;
-        this. resolution_Cell = resolution_cell;
         this.minimum_Range = minimum_range;
         this.max_Unambiguous_Range = max_unamb_range;
         
         Gain_table = CreateGainTable();
-        
+        latest_five_target_coordinates = new List<(double x, double y, int tick)>();
     }
 
     public void Transmit()
@@ -240,7 +239,14 @@ public class Radar : Sensor
     {
         return degrees * (Math.PI / 180);
     }
-
+    public void UpdateLatestTargetCoordinates(double x, double y, int tick)
+    {
+        if (latest_five_target_coordinates.Count == 5)
+        {
+            latest_five_target_coordinates.RemoveAt(0); // Remove oldest entry if the list is full
+        }
+        latest_five_target_coordinates.Add((x, y, tick)); // Add new coordinates
+    }
 }
 
 
