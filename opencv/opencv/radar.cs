@@ -195,7 +195,6 @@ public class Pulse
     public int Id;
     public Vector position;
     public Vector velocity;
-
     public double energy = 0;
     public Radar source;
     public double pwd;
@@ -277,7 +276,7 @@ public class Pulse
         return Math.Sqrt(Math.Pow(radarbase.position.X - this.position.X, 2) + Math.Pow(radarbase.position.Y - this.position.Y, 2));
     }
 
-    public double Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
+    public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
     {
         double time_diff = tick + 20 - latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
@@ -308,15 +307,39 @@ public class Pulse
             //Console.Write(", delta : " + Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI));
             if (distanceToTemp1 < distanceToTemp2)
             {
-                pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                //pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                pradar.azimuth += temp_distance * .1;
             }
             else
             {
-                pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                //pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                pradar.azimuth -= temp_distance * .1;
+
             }
+            int target_x_coordinate_int = (int)target_x_coordinate;
+            int target_y_coordinate_int = (int)target_y_coordinate;
+
+            // Define targetCoordinates using integer coordinates
+            Point target_Coordinates = new Point(target_x_coordinate_int, target_y_coordinate_int);
+
+            //return target_x_coordinate,target_y_coordinate;
+            //Console.WriteLine(", after : " + pradar.azimuth);
+            Console.WriteLine("------------------------------------------------------------");
+
+            Console.WriteLine("target_x_coordinate"+target_x_coordinate);
+            Console.WriteLine("target_y_coordinate"+target_y_coordinate);
+
         }
-        //Console.WriteLine(", after : " + pradar.azimuth);
-        Console.WriteLine("------------------------------------------------------------");
-        return pradar.azimuth;
+
     }
+    public void move_missile(Point target_Coordinates, Missiles missiles)
+    {
+        if (missiles.released && (target_Coordinates.X != position.X || target_Coordinates.Y != position.Y))
+        {
+            double temp_dis = Math.Sqrt(Math.Pow(target_Coordinates.X - position.X, 2) + Math.Pow(target_Coordinates.Y - position.Y, 2));
+           this. position.X += missiles.speed * (target_Coordinates.X - this.position.X) / temp_dis;
+           this. position.Y += missiles.speed * (target_Coordinates.Y -this. position.Y) / temp_dis;
+        }
+    }
+
 }

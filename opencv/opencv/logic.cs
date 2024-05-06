@@ -193,16 +193,16 @@ class logic
                         pulse_radar_list[i].azimuth
                     );
 
-                    for (int j = 0; j < 11; j++)
+                  /*  for (int j = 0; j < 11; j++)
                     {
                         pulse.Move();
-                    }
+                    }*/
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, pulse);
 
                     latest_radar_transmission_tick = tick;
                     current_pulse_id += 1;
-                    if (current_pulse_id >= 250)
+                    if (current_pulse_id >= 255)
                     {
                         current_pulse_id = 0;
                     }
