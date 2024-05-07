@@ -46,8 +46,6 @@ public class Missiles : Wepons
         Console.WriteLine("Sensor is performing OnTick operation");
     }
 
-    
-
     // Define targetCoordinates using integer coordinates
   
     public void move_missile(Vector target_Coordinates)
