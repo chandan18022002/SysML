@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-//using System.Numerics;
 using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-//using radar;         // here im using radar namespace of other ( claseses) file 
+
 using platform;
 using aircraft;
 using radars;
