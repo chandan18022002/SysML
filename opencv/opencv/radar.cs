@@ -12,7 +12,7 @@ using platform;
 using sensor;
 using missile;
 using aircraft;
-namespace radars;
+namespace radar;
 
 public class Radar : Sensor
 {

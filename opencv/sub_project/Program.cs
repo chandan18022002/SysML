@@ -8,7 +8,7 @@ using Emgu.CV.Structure;
 
 using platform;
 using aircraft;
-using radars;
+using radar;
 using pulse;
 
 class main_class
