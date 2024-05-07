@@ -24,12 +24,12 @@ public abstract class BattleSystem
     public abstract void OnTick();
 }
 
-public class data_analyser
+public class Data_analyser
 {
 
 }
 
-public class battle_simulation_engine
+public class Battle_simulation_engine
 {
     public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
@@ -47,7 +47,7 @@ public class battle_simulation_engine
     }
 
 }
-public class scinario
+public class Scinario
 {
     BattleSystem battle_system;
     double sequence_steps;

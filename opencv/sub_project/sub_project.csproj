@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\opencv\opencv.csproj" />
+    <ProjectReference Include="..\opencv\libraries.csproj" />
   </ItemGroup>
 
 </Project>

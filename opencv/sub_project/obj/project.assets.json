@@ -758,7 +758,7 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "opencv/1.0.0": {
+      "libraries/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -769,10 +769,10 @@
           "System.Drawing.Common": "8.0.4"
         },
         "compile": {
-          "bin/placeholder/opencv.dll": {}
+          "bin/placeholder/libraries.dll": {}
         },
         "runtime": {
-          "bin/placeholder/opencv.dll": {}
+          "bin/placeholder/libraries.dll": {}
         }
       }
     }
@@ -2999,15 +2999,15 @@
         "version.txt"
       ]
     },
-    "opencv/1.0.0": {
+    "libraries/1.0.0": {
       "type": "project",
-      "path": "../opencv/opencv.csproj",
-      "msbuildProject": "../opencv/opencv.csproj"
+      "path": "../opencv/libraries.csproj",
+      "msbuildProject": "../opencv/libraries.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "opencv >= 1.0.0"
+      "libraries >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3017,9 +3017,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
+      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
       "projectName": "sub_project",
-      "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
+      "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
       "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\obj\\",
       "projectStyle": "PackageReference",
@@ -3042,8 +3042,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {
-              "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj"
+            "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+              "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
             }
           }
         }

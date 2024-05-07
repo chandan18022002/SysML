@@ -2999,9 +2999,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
-      "projectName": "opencv",
-      "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+      "projectName": "libraries",
+      "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
       "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
       "projectStyle": "PackageReference",

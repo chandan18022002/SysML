@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj": {}
+    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {
+    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
-        "projectName": "opencv",
-        "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj",
+        "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+        "projectName": "libraries",
+        "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
         "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
         "projectStyle": "PackageReference",
@@ -90,12 +90,12 @@
         }
       }
     },
-    "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj": {
+    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
+        "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
         "projectName": "sub_project",
-        "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
+        "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
         "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\obj\\",
         "projectStyle": "PackageReference",
@@ -118,8 +118,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj": {
-                "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\opencv.csproj"
+              "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+                "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
               }
             }
           }
