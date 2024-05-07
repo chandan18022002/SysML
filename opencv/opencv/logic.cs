@@ -5,7 +5,14 @@ using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using radar;         // here im using radar namespace of other ( claseses) file 
+using battle_frame_work;
+using sensor;
+using platform;
+using radars;
+using missile;
+using aircraft;
+using pulse;
+//using radar;         // here im using radar namespace of other ( claseses) file 
 
 class logic
 {
@@ -139,7 +146,7 @@ class logic
                         Pulse pulse = pulse_dictionary[pul_index];
 
                         Vector target_pos;
-                        double[] collided_pos = Collide_radar(tick, latest_radar_transmit_tick, radar, pulsar);
+                        double[] collided_pos = collide_radar(tick, latest_radar_transmission_tick, radarbaselist, pulse_radar_list); 
                         target_pos = new Vector((float)collided_pos[0], (float)collided_pos[1]);
 
 

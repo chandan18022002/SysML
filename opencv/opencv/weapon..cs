@@ -1,5 +1,5 @@
 ﻿
-using radar;
+//using radar;
 using System.Collections.Generic;
 using System;
 using System.Drawing;
@@ -8,6 +8,7 @@ using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using battle_frame_work;
+using platform;
 namespace weapon;
 
 public class Wepons : BattleSystem

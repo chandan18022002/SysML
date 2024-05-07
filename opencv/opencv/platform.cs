@@ -1,5 +1,5 @@
 ﻿
-using radar;
+//using radar;
 using System.Collections.Generic;
 using System;
 
@@ -9,7 +9,8 @@ using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using battle_frame_work;
-namespace paltform;
+using sensor;
+namespace platform;
 
 public class Platform : BattleSystem
 {

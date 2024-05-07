@@ -1,4 +1,4 @@
-﻿using radar;
+﻿//using radar;
 using System.Collections.Generic;
 using System;
 
@@ -7,7 +7,10 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
+using platform;
+using weapon;
 namespace gun;
+
 public class Guns : Wepons
 {
     public string id;

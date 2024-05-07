@@ -178,6 +178,7 @@ public class Radar : Sensor
    
     public Dictionary<double, double[]> Gain_table;
     public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
+   
 
     public Radar(int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range,double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)

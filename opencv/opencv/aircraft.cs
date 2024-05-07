@@ -7,7 +7,11 @@ using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 namespace aircraft;
-using radar;
+using platform;
+using sensor;
+
+
+//using radar;
 public class Aircraft : Platform
 {
     private string id;
