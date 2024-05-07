@@ -113,7 +113,7 @@ public class Pulse
          Console.WriteLine("Target's y coordinate: " + target_y_coordinate);*/
         pradar.UpdateLatestTargetCoordinates(position.X, position.Y, latest_radar_transmit_tick);
         // Console.Write(pradar.latest_five_target_coordinates);
-        Console.WriteLine("Latest Five Target Coordinates: " + string.Join(", ", pradar.latest_five_target_coordinates));
+        //Console.WriteLine("Latest Five Target Coordinates: " + string.Join(", ", pradar.latest_five_target_coordinates));
 
 
         double temp_distance = CalculateDistance(rb);

@@ -13,7 +13,7 @@ using sensor;
 namespace ew_sensor;
 
 
-public class Esn : Sensor
+public class Esm : Sensor
 {
     public double no_of_antenna;
     public double pwds;
@@ -21,7 +21,7 @@ public class Esn : Sensor
     public double antenna_configaration;
     public double reception_band;
 
-    public Esn(int id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
+    public Esm(int id, Platform platform, double no_of_antenna, double pwd, double emmiter_records, double antenna_configaration, double reception_band)
          : base(id, platform)
     {
         this.no_of_antenna = no_of_antenna;

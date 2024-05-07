@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-using System.Numerics;
+//using System.Numerics;
 using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
