@@ -138,12 +138,23 @@ class logic
                     {
                         Pulse pulse = pulse_dictionary[pul_index];
 
+                        Vector target_pos;
+                        double[] collided_pos = Collide_radar(tick, latest_radar_transmit_tick, radar, pulsar);
+                        target_pos = new Vector((float)collided_pos[0], (float)collided_pos[1]);
 
 
-                        pulse_radar_list[i].azimuth= pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
+                        // Assign values to target_pos
+                       // target_pos.X = target_x_coordinate;
+                       // target_pos.Y = target_y_coordinate;
+                      //  double[] target_pos= double target_x_coordinate, double target_y_coordinate;
+                        //(double target_x_coordinate, double target_y_coordinate) = Collide_radar(tick, latest_radar_transmit_tick, radar, pulsar);
+                        //
+                        //pulse_radar_list[i].azimuth= pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
                         for (int j = missile_dictionary.Count - 1; j >= 0; i--)
                         {
-                           Vector target_pos = missile_dictionary[j].target_coordinates;
+                            // (double target_x_coordinate, double target_y_coordinate) = missile_dictionary[j].target_coordinates;
+
+                           target_pos = missile_dictionary[j].target_coordinates;
                         }
                             pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
 

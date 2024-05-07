@@ -223,8 +223,6 @@ public class Pulse
 
     }
 
-
-
     public void Move()
     {
         double time_diff = 1.0;
@@ -276,6 +274,8 @@ public class Pulse
         return Math.Sqrt(Math.Pow(radarbase.position.X - this.position.X, 2) + Math.Pow(radarbase.position.Y - this.position.Y, 2));
     }
 
+
+
     public void Collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
     {
         double time_diff = tick + 20 - latest_radar_transmit_tick;
@@ -287,8 +287,8 @@ public class Pulse
         double lambda = Math.Sqrt(Math.Pow(this.velocity.X, 2) + Math.Pow(this.velocity.Y, 2)) / pradar.frequency;
         this.energy = this.energy * (pradar.Gain_table[(int)frequency][(int)(this.azimuth - pradar.azimuth)]) * Math.Pow(lambda, 2) / (4 * Math.PI * Math.Pow(this.distance_travelled, 2));
 
-        Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
-        Console.WriteLine("Target's y coordinate: " + target_y_coordinate);
+       /* Console.WriteLine("Target's x coordinate: " + target_x_coordinate);
+        Console.WriteLine("Target's y coordinate: " + target_y_coordinate);*/
         pradar.UpdateLatestTargetCoordinates(position.X, position.Y, latest_radar_transmit_tick);
         // Console.Write(pradar.latest_five_target_coordinates);
         Console.WriteLine("Latest Five Target Coordinates: " + string.Join(", ", pradar.latest_five_target_coordinates));
