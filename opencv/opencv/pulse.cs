@@ -129,13 +129,13 @@ public class Pulse
             //Console.Write(", delta : " + Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI));
             if (distanceToTemp1 < distanceToTemp2)
             {
-                //pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
-                pradar.azimuth += temp_distance * .1;
+                pradar.azimuth -= Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                //pradar.azimuth += temp_distance * .1;
             }
             else
             {
-                //pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
-                pradar.azimuth -= temp_distance * .1;
+                pradar.azimuth += Math.Atan(temp_distance / this.distance_travelled) * (180 / Math.PI);
+                //pradar.azimuth -= temp_distance * .1;
 
             }
             
@@ -143,8 +143,8 @@ public class Pulse
             //Console.WriteLine(", after : " + pradar.azimuth);
             Console.WriteLine("------------------------------------------------------------");
 
-            Console.WriteLine("target_x_coordinate" + target_x_coordinate);
-            Console.WriteLine("target_y_coordinate" + target_y_coordinate);
+            Console.WriteLine("target_x_coordinate - " + target_x_coordinate);
+            Console.WriteLine("target_y_coordinate - " + target_y_coordinate);
 
         }
 

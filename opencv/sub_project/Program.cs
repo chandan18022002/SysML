@@ -6,7 +6,11 @@ using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using radar;         // here im using radar namespace of other ( claseses) file 
+//using radar;         // here im using radar namespace of other ( claseses) file 
+using platform;
+using aircraft;
+using radars;
+using pulse;
 
 class main_class
 {
@@ -97,7 +101,8 @@ class main_class
                     if (pulse_dictionary.ContainsKey(pul_index))
                     {
                         Pulse pulse = pulse_dictionary[pul_index];
-                        pulse_radar_list[i].azimuth = pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
+                        //pulse_radar_list[i].azimuth = pulse.collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
+                        pulse.collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
                         pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
                     }
                     pulse_dictionary.Remove(i);
