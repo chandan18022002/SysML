@@ -138,12 +138,7 @@ public class Pulse
                 pradar.azimuth -= temp_distance * .1;
 
             }
-            int target_x_coordinate_int = (int)target_x_coordinate;
-            int target_y_coordinate_int = (int)target_y_coordinate;
-
-            // Define targetCoordinates using integer coordinates
-            Point target_Coordinates = new Point(target_x_coordinate_int, target_y_coordinate_int);
-
+            
             //return target_x_coordinate,target_y_coordinate;
             //Console.WriteLine(", after : " + pradar.azimuth);
             Console.WriteLine("------------------------------------------------------------");
@@ -154,14 +149,6 @@ public class Pulse
         }
 
     }
-    public void move_missile(Point target_Coordinates, Missiles missiles)
-    {
-        if (missiles.released && (target_Coordinates.X != position.X || target_Coordinates.Y != position.Y))
-        {
-            double temp_dis = Math.Sqrt(Math.Pow(target_Coordinates.X - position.X, 2) + Math.Pow(target_Coordinates.Y - position.Y, 2));
-            this.position.X += missiles.speed * (target_Coordinates.X - this.position.X) / temp_dis;
-            this.position.Y += missiles.speed * (target_Coordinates.Y - this.position.Y) / temp_dis;
-        }
-    }
+    
 
 }

@@ -45,6 +45,20 @@ public class Missiles : Wepons
         // Implement OnTick logic specific to Sensor
         Console.WriteLine("Sensor is performing OnTick operation");
     }
+
+    
+
+    // Define targetCoordinates using integer coordinates
+  
+    public void move_missile(Vector target_Coordinates)
+    {
+        if (this.released && (target_Coordinates.X != this.position.X || target_Coordinates.Y != this.position.Y))
+        {
+            double temp_dis = Math.Sqrt(Math.Pow(target_Coordinates.X - this.position.X, 2) + Math.Pow(target_Coordinates.Y - this.position.Y, 2));
+            this.position.X += this.speed * (target_Coordinates.X - this.position.X) / temp_dis;
+            this.position.Y += this.speed * (target_Coordinates.Y - this.position.Y) / temp_dis;
+        }
+    }
 }
 public class Radar_guided : Missiles
 {
