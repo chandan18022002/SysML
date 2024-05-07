@@ -7,6 +7,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
+using battle_frame_work;
 namespace weapon;
 
 public class Wepons : BattleSystem
