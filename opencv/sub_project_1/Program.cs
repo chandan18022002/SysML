@@ -36,28 +36,34 @@ class main_class
 
 
         //radAR  class initialsization
-        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 500, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
+        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 200, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
+                                                 // radarbaselist.Add(radarbase);
+
+        // Add radarbaselist to pulse_radar_list
         pulse_radar_list.Add(pulse_radar);
 
+        //radarbase.onboardSensor.Add(pulse_radar); pulse_radar_list.Add(radarbaselist);
+
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft(0, .1, 0, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
-        aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
+        Aircraft aircraft0 = new Aircraft(0, .01, 0, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
+        aircraftlist.Add(aircraft0);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
 
         Aircraft aircraft1 = new Aircraft(1, .1, 0, [new Vector(100, 100)], []);
         aircraftlist.Add(aircraft1);
 
-        Radar_guided rdr_guided = new Radar_guided(1, aircraftlist[1], aircraftlist[1].position, 0.05, 0.0, [], true, aircraftlist[1].position);
-        //missile_dictionary.Add(rdr_guided);
-        int mis_id = rdr_guided.Id;
-        missile_dictionary.Add(mis_id, rdr_guided);
-
-
-
+        Radar_guided rdr_guided = new Radar_guided(1, aircraftlist[1], new Vector(aircraftlist[1].position.X, aircraftlist[1].position.Y), 0.5, 0.0, [], true, aircraftlist[1].position);
+        Console.WriteLine(rdr_guided.Id);
+        //int mis_id = rdr_guided.Id;
+        missile_dictionary.Add(rdr_guided.Id, rdr_guided);
+        Console.WriteLine(rdr_guided.Id);
         int tick = 0;
         int current_pulse_id = 0;
         int latest_radar_transmission_tick = 0;
         int pul_index = 0;
+
+
+
         while (true)
         {
             Mat image_visual = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
@@ -87,6 +93,7 @@ class main_class
 
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
+                // int j = missile_dictionary.Count;
                 Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
                 if (actual_pixelValue.Red == 255)
                 {
@@ -102,35 +109,41 @@ class main_class
                 aircraftlist[i].MovePlatform();
                 CvInvoke.PutText(image_visual, Math.Round(aircraftlist[i].position.X, 2).ToString() + "," + Math.Round(aircraftlist[i].position.Y, 2).ToString(), new Point((int)aircraftlist[i].position.X + 10, (int)aircraftlist[i].position.Y + 10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
-                CvInvoke.Circle(image_missile, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
+                // CvInvoke.Circle(image_missile, new Point((int)missile_dictionary[j].position.X, (int)missile_dictionary[j].position.Y), 3, new MCvScalar(0, 255, 0), -1);
 
             }
-            for (int i = missile_dictionary.Count - 1; i >= 0; i--)
+            //for (var kvp = missile_dictionary.Count - 1;kvp >= 0; kvp--)
+
+            foreach (var pair in missile_dictionary)
             {
-                Bgr actual_pixelValue = GetPixelBgr(image_missile, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
+                int j = pair.Key;
+                CvInvoke.Circle(image_visual, new Point((int)missile_dictionary[j].position.X, (int)missile_dictionary[j].position.Y), 3, new MCvScalar(255, 255, 0), -1);
+                CvInvoke.Circle(image_missile, new Point((int)missile_dictionary[j].position.X, (int)missile_dictionary[j].position.Y), 3, new MCvScalar(0, 255, 0), -1);
+            }
+            foreach (var kvp in missile_dictionary.ToList())
+            {
+                rdr_guided.Id = kvp.Key;
+                Bgr actual_pixelValue = GetPixelBgr(image_missile, (int)aircraftlist[0].position.X, (int)aircraftlist[0].position.Y);
                 if (actual_pixelValue.Green == 255)
                 {
-                    mis_id = (int)actual_pixelValue.Blue;
-                    if (missile_dictionary.ContainsKey(mis_id))
-                    {
-                        Aircraft air = aircraftlist[mis_id];
-                        //print(missile of id - {it’s id} has collided with an aircraft of id - {it’s id} )
-                        //pulse.Collided_Target(aircraft.heading, RadarCrossSection);
-                        Console.WriteLine($"Missile of id - {mis_id} has collided with an aircraft of id - {aircraftlist[i].Id}");
-                        aircraftlist.Remove(aircraftlist[i]);
-                        missile_dictionary.Remove(mis_id);
+                    //rdr_guided.Id = (int)actual_pixelValue.Green;
 
+                    if (missile_dictionary.ContainsKey(rdr_guided.Id))
+                    {
+                        //Aircraft air = aircraftlist[mis_id];
+                        Console.WriteLine($"Missile of id - {rdr_guided.Id} has collided with an aircraft of id - {aircraftlist[rdr_guided.Id].Id}");
+                        aircraftlist.Remove(aircraftlist[aircraft0.Id]);
+                        missile_dictionary.Remove(rdr_guided.Id);
                     }
-                    missile_dictionary.Remove(i);
+                    //Console.WriteLine($"Missile of id - {rdr_guided.Id} has collided with an aircraft of id - {aircraftlist[mis_id].Id}");
+                    //aircraftlist.Remove(aircraftlist[aircraft0.Id]);
+                    missile_dictionary.Remove(rdr_guided.Id);
                 }
 
-
-                CvInvoke.Circle(image_visual, new Point((int)missile_dictionary[i].position.X, (int)missile_dictionary[i].position.Y), 3, new MCvScalar(0, 255, 255), -1);
-                //CvInvoke.Crcle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
+                rdr_guided.move_missile();
+                // CvInvoke.Circle(image_visual, new Point((int)missile_dictionary[i].position.X, (int)missile_dictionary[i].position.Y), 3, new MCvScalar(0, 255, 255), -1);
+                // CvInvoke.Circle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 255), -1);
             }
-
-
-
 
             for (int i = pulse_radar_list.Count - 1; i >= 0; i--)
             {
@@ -147,34 +160,22 @@ class main_class
                         Pulse pulse = pulse_dictionary[pul_index];
 
                         Vector target_pos;
-                        double[] collided_pos = collide_radar(tick, latest_radar_transmission_tick, radarbaselist, pulse_radar_list);
-                        target_pos = new Vector((float)collided_pos[0], (float)collided_pos[1]);
+                        target_pos = pulse.collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
 
 
-                        // Assign values to target_pos
-                        // target_pos.X = target_x_coordinate;
-                        // target_pos.Y = target_y_coordinate;
-                        //  double[] target_pos= double target_x_coordinate, double target_y_coordinate;
-                        //(double target_x_coordinate, double target_y_coordinate) = Collide_radar(tick, latest_radar_transmit_tick, radar, pulsar);
-                        //
-                        //pulse_radar_list[i].azimuth= pulse.Collide_radar(tick, latest_radar_transmission_tick, radarbase, pulse_radar_list[i]);
-                        for (int j = missile_dictionary.Count - 1; j >= 0; i--)
+                        for (int j = missile_dictionary.Count; j > 0; j--)
                         {
                             // (double target_x_coordinate, double target_y_coordinate) = missile_dictionary[j].target_coordinates;
 
-                            target_pos = missile_dictionary[j].target_coordinates;
+                            missile_dictionary[j].target_coordinates = target_pos;
+
                         }
                         pulse_dictionary.Remove(pul_index); // Remove the pulse from the dictionary after processing
-
 
                     }
                     pulse_dictionary.Remove(i);
                 }
-                //RadarBase current_radar__base = pulse_radar_list[i];
-                //current radar base is onboard sensor in pulse_radar_list[i]
-                // Use current radar base position for circle
-                // CvInvoke.Circle(image_actual, new Point((int)current_radarbase.position.X, (int)current_radarbase.position.Y), 3, new MCvScalar(255, 0, 0), -1);
-                // use pulse_radar_list[i] instead of pulse_radar
+
                 if (tick % pulse_radar_list[i].pri == 0)
                 //if (tick == 0)
                 {
@@ -187,12 +188,6 @@ class main_class
 
 
                     //creating pulse                                                                                                                          
-
-                    // Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y), new Vector(vel_x, vel_y),
-                    //  ( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
-                    //pulse position should be rdar position so it achieve by .x and .y individually 
-                    // pulse_radar.frequency convert to index
-
 
                     double power = pulse_radar_list[i].peak_transmission_power * pulse_radar_list[i].Gain_table[pulse_radar_list[i].frequency][0];     //36 beacause it is index value of 18.5 frequency
                     //int powerInt = (int)power; // Convert double to int, truncating any fractional part
@@ -212,10 +207,10 @@ class main_class
                         pulse_radar_list[i].azimuth
                     );
 
-                    /*  for (int j = 0; j < 11; j++)
-                      {
-                          pulse.Move();
-                      }*/
+                    for (int j = 0; j < 11; j++)
+                    {
+                        pulse.Move();
+                    }
                     //// add that pulse in list of pulses
                     pulse_dictionary.Add(pul_index, pulse);
 
@@ -278,8 +273,6 @@ class main_class
         Image<Bgr, byte> img = image.ToImage<Bgr, byte>();
         return img[y, x];
     }
-
-
 
 }
 

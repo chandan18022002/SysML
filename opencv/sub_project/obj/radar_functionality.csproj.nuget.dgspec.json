@@ -1,0 +1,154 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+        "projectName": "libraries",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+        "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Emgu.CV": {
+              "target": "Package",
+              "version": "[4.8.1.5350, )"
+            },
+            "Emgu.CV.Bitmap": {
+              "target": "Package",
+              "version": "[4.8.1.5350, )"
+            },
+            "Emgu.CV.runtime.windows": {
+              "target": "Package",
+              "version": "[4.8.1.5350, )"
+            },
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.8, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
+        "projectName": "radar_functionality",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
+        "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+                "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

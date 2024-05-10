@@ -1,0 +1,6 @@
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.csproj.AssemblyReference.cache
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.AssemblyInfoInputs.cache
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.AssemblyInfo.cs
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.csproj.CoreCompileInputs.cache
+C:\Users\Pinaka\Source\Repos\rohitchaoji\SysML\opencv\sub_project_1\obj\Debug\net8.0\sub_project_1.sourcelink.json

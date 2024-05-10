@@ -48,13 +48,13 @@ public class Missiles : Wepons
 
     // Define targetCoordinates using integer coordinates
   
-    public void move_missile(Vector target_Coordinates)
+    public void move_missile()
     {
-        if (this.released && (target_Coordinates.X != this.position.X || target_Coordinates.Y != this.position.Y))
+        if (this.released && (this.target_coordinates.X != this.position.X || this.target_coordinates.Y != this.position.Y))
         {
-            double temp_dis = Math.Sqrt(Math.Pow(target_Coordinates.X - this.position.X, 2) + Math.Pow(target_Coordinates.Y - this.position.Y, 2));
-            this.position.X += this.speed * (target_Coordinates.X - this.position.X) / temp_dis;
-            this.position.Y += this.speed * (target_Coordinates.Y - this.position.Y) / temp_dis;
+            double temp_dis = Math.Sqrt(Math.Pow(target_coordinates.X - this.position.X, 2) + Math.Pow(this.target_coordinates.Y - this.position.Y, 2));
+            this.position.X += this.speed * (this.target_coordinates.X - this.position.X) / temp_dis;
+            this.position.Y += this.speed * (this.target_coordinates.Y - this.position.Y) / temp_dis;
         }
     }
 }

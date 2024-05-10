@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj": {}
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
         "projectName": "libraries",
-        "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
-        "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj",
+        "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\chand\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,25 +82,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj": {
+    "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj",
+        "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj",
         "projectName": "sub_project_1",
-        "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj",
-        "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\obj\\",
+        "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\sub_project_1.csproj",
+        "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project_1\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\chand\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,8 +110,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
-                "projectPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
+              "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+                "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
               }
             }
           }
@@ -154,7 +146,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

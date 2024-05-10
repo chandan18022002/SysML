@@ -7,7 +7,7 @@ using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using platform;
-using radars;
+using radar;
 using missile;
 using aircraft;
 namespace pulse;
@@ -98,7 +98,7 @@ public class Pulse
 
 
 
-    public void collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
+    public Vector collide_radar(int tick, int latest_radar_transmit_tick, RadarBase rb, Pulsed_radar pradar)
     {
         double time_diff = tick + 20 - latest_radar_transmit_tick;
         double target_distance = Math.Sqrt(Math.Pow(velocity.X, 2) + Math.Pow(velocity.Y, 2)) * time_diff / 2;
@@ -145,9 +145,9 @@ public class Pulse
 
             Console.WriteLine("target_x_coordinate - " + target_x_coordinate);
             Console.WriteLine("target_y_coordinate - " + target_y_coordinate);
-
+            
         }
-
+        return new Vector(target_x_coordinate, target_y_coordinate);
     }
     
 

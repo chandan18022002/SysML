@@ -3011,24 +3011,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chand\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Pinaka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
-      "projectName": "sub_project",
-      "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\sub_project.csproj",
-      "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chand\\source\\repos\\rohitchaoji\\SysML\\opencv\\sub_project\\obj\\",
+      "projectUniqueName": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
+      "projectName": "radar_functionality",
+      "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
+      "packagesPath": "C:\\Users\\Pinaka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\sub_project\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\chand\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Pinaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3042,8 +3037,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
-              "projectPath": "C:\\Users\\chand\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
+            "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj": {
+              "projectPath": "C:\\Users\\Pinaka\\Source\\Repos\\rohitchaoji\\SysML\\opencv\\opencv\\libraries.csproj"
             }
           }
         }
@@ -3078,7 +3073,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
