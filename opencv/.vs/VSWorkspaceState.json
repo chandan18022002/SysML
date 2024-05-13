@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\opencv"
+    "\\opencv",
+    "\\sub_project_1"
   ],
-  "SelectedNode": "\\opencv\\missile.cs",
+  "SelectedNode": "\\sub_project_1\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

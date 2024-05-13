@@ -53,10 +53,9 @@ class main_class
         aircraftlist.Add(aircraft1);
 
         Radar_guided rdr_guided = new Radar_guided(1, aircraftlist[1], new Vector(aircraftlist[1].position.X, aircraftlist[1].position.Y), 0.5, 0.0, [], true, aircraftlist[1].position);
-        Console.WriteLine(rdr_guided.Id);
-        //int mis_id = rdr_guided.Id;
+     
         missile_dictionary.Add(rdr_guided.Id, rdr_guided);
-        Console.WriteLine(rdr_guided.Id);
+   
         int tick = 0;
         int current_pulse_id = 0;
         int latest_radar_transmission_tick = 0;
@@ -112,7 +111,7 @@ class main_class
                 // CvInvoke.Circle(image_missile, new Point((int)missile_dictionary[j].position.X, (int)missile_dictionary[j].position.Y), 3, new MCvScalar(0, 255, 0), -1);
 
             }
-            //for (var kvp = missile_dictionary.Count - 1;kvp >= 0; kvp--)
+           
 
             foreach (var pair in missile_dictionary)
             {
@@ -126,7 +125,7 @@ class main_class
                 Bgr actual_pixelValue = GetPixelBgr(image_missile, (int)aircraftlist[0].position.X, (int)aircraftlist[0].position.Y);
                 if (actual_pixelValue.Green == 255)
                 {
-                    //rdr_guided.Id = (int)actual_pixelValue.Green;
+                   
 
                     if (missile_dictionary.ContainsKey(rdr_guided.Id))
                     {
@@ -135,8 +134,7 @@ class main_class
                         aircraftlist.Remove(aircraftlist[aircraft0.Id]);
                         missile_dictionary.Remove(rdr_guided.Id);
                     }
-                    //Console.WriteLine($"Missile of id - {rdr_guided.Id} has collided with an aircraft of id - {aircraftlist[mis_id].Id}");
-                    //aircraftlist.Remove(aircraftlist[aircraft0.Id]);
+                    
                     missile_dictionary.Remove(rdr_guided.Id);
                 }
 
