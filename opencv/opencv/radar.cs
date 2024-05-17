@@ -12,6 +12,7 @@ using platform;
 using sensor;
 using missile;
 using aircraft;
+using generics;
 namespace radar;
 
 public class Radar : Sensor
@@ -125,14 +126,15 @@ public class Pulsed_radar : Radar
         this.peak_transmission_power = peak_transmission_power;
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
-
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -152,14 +154,15 @@ public class Continous_wave : Radar
         this.TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
         this.ReceivedFrequency = received_frequency; // Initialize Received Frequency
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
-
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -178,14 +181,15 @@ public class Pulse_Doppler : Radar
     {
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
-
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()

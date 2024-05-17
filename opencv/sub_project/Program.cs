@@ -28,7 +28,6 @@ class main_class
         RadarBase radarbase = new RadarBase(0, 0, 0, [new Vector(100, 300)], []);
         radarbaselist.Add(radarbase);
 
-
         //radAR  class initialsization
         Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
@@ -50,7 +49,7 @@ class main_class
 
             Mat image_actual = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
             image_actual.SetTo(new Bgr(0, 0, 0).MCvScalar);
-
+            //Pulse visualize and move
             for (int i = pulse_dictionary.Count - 1; i >= 0; i--)
             {
                 //Red Pulse
@@ -67,6 +66,7 @@ class main_class
                 pulse.Move();
             }
 
+            //Aircraft visualize, move and pulse.collide
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
                 Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
@@ -87,6 +87,7 @@ class main_class
             }
             //Trigger pulse.collided_radar(tick, latest_radar_transmit_tick,radar.host_platform,radar) function
 
+            //Radar visualize, move, pulse.collide, remove_pulse and create_and_transmit_pulse
             for (int i = pulse_radar_list.Count - 1; i >= 0; i--)
             {
                 RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].hostPlatform));
@@ -182,7 +183,6 @@ class main_class
             }
         }
         CvInvoke.DestroyAllWindows();
-
     }
 
     static double DegreesToRadians(double degrees)// converting degree into radians (azimuth input)

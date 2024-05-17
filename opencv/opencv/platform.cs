@@ -10,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using battle_frame_work;
 using sensor;
+using generics;
 namespace platform;
 
 public class Platform : BattleSystem
@@ -74,14 +75,16 @@ public class Platform : BattleSystem
     }
 
 
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -118,14 +121,16 @@ public class RadarBase : Platform
     public string id;
 
 
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        this.Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
     public RadarBase(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor)
         : base(id, Speed, Heading, Waypoints, OnboardSensor)

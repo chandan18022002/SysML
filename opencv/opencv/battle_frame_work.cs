@@ -7,6 +7,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
+using platform;
+using generics;
 namespace battle_frame_work;
 
 public abstract class BattleSystem
@@ -17,8 +19,8 @@ public abstract class BattleSystem
         this.Id = id;
     }
     public int Id;
-    public abstract void Set(int id);
-    public abstract int Get();
+    public abstract void Set(List<Pair<string, string>> param);
+    public abstract List<Pair<string,string>> Get();
 
     // Abstract method for OnTick
     public abstract void OnTick();

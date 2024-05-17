@@ -8,6 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using weapon;
 using platform;
+using generics;
 namespace missile;
 
 
@@ -30,14 +31,16 @@ public class Missiles : Wepons
         this.released = released;
         this.target_coordinates = target_coardinates;
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -67,14 +70,16 @@ public class Radar_guided : Missiles
     {
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -91,14 +96,16 @@ public class Active_guider : Missiles
     {
         this.onboard_radar = onboard_radar;
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -115,16 +122,17 @@ public class Image_guidence : Missiles
     {
         this.onboard__image_sensor = onboard_image_sensor;
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        this.Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
-
     public override void OnTick()
     {
         // Implement OnTick logic specific to Sensor
@@ -139,16 +147,17 @@ public class Gps_guidence : Missiles
     {
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
-
     public override void OnTick()
     {
         // Implement OnTick logic specific to Sensor
@@ -163,16 +172,17 @@ public class Semiacive_guidence : Missiles
     {
         this.onboard_receiver = onboard_receiver;
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
-
     public override void OnTick()
     {
         // Implement OnTick logic specific to Sensor
@@ -187,14 +197,15 @@ public class Passive_guidence : Missiles
     {
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
-
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
@@ -212,14 +223,16 @@ public class Terrian_following_guidence : Missiles
 
 
     }
-    public override void Set(int id)
+    public override void Set(List<Pair<string, string>> param)
     {
-        Id = id;
     }
 
-    public override int Get()
+    public override List<Pair<string, string>> Get()
     {
-        return Id;
+        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
+        tmp_list.Add(tmp_pair);
+        return tmp_list;//this.position;
     }
 
     public override void OnTick()
