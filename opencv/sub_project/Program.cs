@@ -11,7 +11,7 @@ using aircraft;
 using radar;
 using pulse;
 
-class main_class
+class MainClass
 {
     static void Main(string[] args)
     {
@@ -19,7 +19,7 @@ class main_class
         // List<Pulse> pulselist = new List<Pulse>();
         List<RadarBase> radarbaselist = new List<RadarBase>();
         List<Aircraft> aircraftlist = new List<Aircraft>();
-        List<Pulsed_radar> pulse_radar_list = new List<Pulsed_radar>();
+        List<PulsedRadar> pulse_radar_list = new List<PulsedRadar>();
 
         //Dictionary of the pulse
         Dictionary<int, Pulse> pulse_dictionary = new Dictionary<int, Pulse>();
@@ -29,7 +29,7 @@ class main_class
         radarbaselist.Add(radarbase);
 
         //radAR  class initialsization
-        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
+        PulsedRadar pulse_radar = new PulsedRadar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
         pulse_radar_list.Add(pulse_radar);
 

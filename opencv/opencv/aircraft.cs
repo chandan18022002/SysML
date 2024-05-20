@@ -6,18 +6,14 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
-namespace aircraft;
-
 using generics;
 using LanguageExt;
 using platform;
 using sensor;
 
-
-//using radar;
+namespace aircraft;
 public class Aircraft : Platform
 {
-    private string id;
 
     public override void Set(List<Pair<string, string>> param)
     {
@@ -25,13 +21,14 @@ public class Aircraft : Platform
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() { 
+            new Pair<string, string>("Position_x", this.position.X.ToString()),
+            new Pair<string, string>("Position_y", this.position.Y.ToString()),
+        };
         return tmp_list;//this.position;
     }
-    public Aircraft(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor /*,double radar_cross_section*/)
-        : base(id, Speed, Heading, Waypoints, OnboardSensor)
+    public Aircraft(int id, double speed, double heading, List<Vector> waypoints, List<Sensor> onboardSensor /*,double radar_cross_section*/)
+        : base(id, speed, heading, waypoints, onboardSensor)
     {
 
 

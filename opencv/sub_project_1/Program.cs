@@ -5,7 +5,7 @@ using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using battle_frame_work;
+using battleFrameWork;
 using sensor;
 using platform;
 using radar;
@@ -15,7 +15,7 @@ using pulse;
 //using radar;         // here im using radar namespace of other ( claseses) file 
 
 
-class main_class
+class MainClass
 {
     static void Main(string[] args)
     {
@@ -23,7 +23,7 @@ class main_class
         // List<Pulse> pulselist = new List<Pulse>();
         List<RadarBase> radarbaselist = new List<RadarBase>();
         List<Aircraft> aircraftlist = new List<Aircraft>();
-        List<Pulsed_radar> pulse_radar_list = new List<Pulsed_radar>();
+        List<PulsedRadar> pulse_radar_list = new List<PulsedRadar>();
 
         //Dictionary of the pulse
         Dictionary<int, Pulse> pulse_dictionary = new Dictionary<int, Pulse>();
@@ -36,7 +36,7 @@ class main_class
 
 
         //radAR  class initialsization
-        Pulsed_radar pulse_radar = new Pulsed_radar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 200, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
+        PulsedRadar pulse_radar = new PulsedRadar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 200, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
                                                  // radarbaselist.Add(radarbase);
 
@@ -52,7 +52,7 @@ class main_class
         Aircraft aircraft1 = new Aircraft(1, .1, 0, [new Vector(100, 100)], []);
         aircraftlist.Add(aircraft1);
 
-        Radar_guided rdr_guided = new Radar_guided(1, aircraftlist[1], new Vector(aircraftlist[1].position.X, aircraftlist[1].position.Y), 0.5, 0.0, [], true, aircraftlist[1].position);
+        RadarGuided rdr_guided = new RadarGuided(1, aircraftlist[1], new Vector(aircraftlist[1].position.X, aircraftlist[1].position.Y), 0.5, 0.0, [], true, aircraftlist[1].position);
      
         missile_dictionary.Add(rdr_guided.Id, rdr_guided);
    

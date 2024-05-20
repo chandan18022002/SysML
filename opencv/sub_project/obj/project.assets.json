@@ -3017,9 +3017,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
-      "projectName": "radar_functionality",
-      "projectPath": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\sub_project\\radar_functionality.csproj",
+      "projectUniqueName": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\sub_project\\radarFunctionality.csproj",
+      "projectName": "radarFunctionality",
+      "projectPath": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\sub_project\\radarFunctionality.csproj",
       "packagesPath": "C:\\Users\\chand\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\sub_project\\obj\\",
       "projectStyle": "PackageReference",

@@ -8,12 +8,12 @@ namespace generics
 {
     public class Pair<T1,T2>
     {
-        T1 first;
-        T2 second;
+        T1 First;
+        T2 Second;
         public Pair(T1 first, T2 second)
         {
-            this.first = first;
-            this.second = second;
+            this.First = first;
+            this.Second = second;
         }
     }
 }

@@ -3,40 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\weapon..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\weapon..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\radar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\radar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\platform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\platform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\gun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\gun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\aircraft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\aircraft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\battle_frame_work.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\battle_frame_work.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D130338-7677-4517-9E0F-B8BEE00BDFD2}|sub_project_1\\radarGuidedMissile.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\sub_project_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D130338-7677-4517-9E0F-B8BEE00BDFD2}|sub_project_1\\radarGuidedMissile.csproj|solutionrelative:sub_project_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\generics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\generics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\ewsensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\ewsensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|c:\\users\\chand\\source\\repos\\chandan18022002\\sysml\\opencv\\opencv\\battleframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF740009-DEC4-4FD8-8008-9C7626140248}|opencv\\libraries.csproj|solutionrelative:opencv\\battleframework.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,110 +34,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "sensor.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\sensor.cs",
-              "RelativeDocumentMoniker": "opencv\\sensor.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\sensor.cs",
-              "RelativeToolTip": "opencv\\sensor.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAuwB4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:50:47.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "radar.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\radar.cs",
-              "RelativeDocumentMoniker": "opencv\\radar.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\radar.cs",
-              "RelativeToolTip": "opencv\\radar.cs",
-              "ViewState": "AQIAALYAAAAAAAAAAAAAALkAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:49:50.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\Program.cs",
+              "RelativeDocumentMoniker": "opencv\\Program.cs",
+              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\Program.cs",
+              "RelativeToolTip": "opencv\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-20T06:18:29.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "weapon..cs",
               "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\weapon..cs",
               "RelativeDocumentMoniker": "opencv\\weapon..cs",
               "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\weapon..cs",
               "RelativeToolTip": "opencv\\weapon..cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAApwBcAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:49:08.039Z",
+              "WhenOpened": "2024-05-20T06:18:14.404Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "generics.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\generics.cs",
-              "RelativeDocumentMoniker": "opencv\\generics.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\generics.cs",
-              "RelativeToolTip": "opencv\\generics.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\sub_project_1\\Program.cs",
+              "RelativeDocumentMoniker": "sub_project_1\\Program.cs",
+              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\sub_project_1\\Program.cs",
+              "RelativeToolTip": "sub_project_1\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:47:37.162Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "missile.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\missile.cs",
-              "RelativeDocumentMoniker": "opencv\\missile.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\missile.cs",
-              "RelativeToolTip": "opencv\\missile.cs",
-              "ViewState": "AQIAAN0AAAAAAAAAAAAtwOMAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:44:09.149Z",
+              "WhenOpened": "2024-05-20T06:18:07.996Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "platform.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\platform.cs",
-              "RelativeDocumentMoniker": "opencv\\platform.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\platform.cs",
-              "RelativeToolTip": "opencv\\platform.cs",
-              "ViewState": "AQIAAHoAAAAAAAAAAAAAAH0AAAAFAAAA",
+              "Title": "generics.cs",
+              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\generics.cs",
+              "RelativeDocumentMoniker": "opencv\\generics.cs",
+              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\generics.cs",
+              "RelativeToolTip": "opencv\\generics.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:43:59.246Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "gun.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\gun.cs",
-              "RelativeDocumentMoniker": "opencv\\gun.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\gun.cs",
-              "RelativeToolTip": "opencv\\gun.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAYwCIAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:43:17.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "battle_frame_work.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\battle_frame_work.cs",
-              "RelativeDocumentMoniker": "opencv\\battle_frame_work.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\battle_frame_work.cs",
-              "RelativeToolTip": "opencv\\battle_frame_work.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAApwBYAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T10:42:41.073Z",
+              "WhenOpened": "2024-05-20T06:16:58.014Z",
               "EditorCaption": ""
             },
             {
@@ -166,15 +102,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "aircraft.cs",
-              "DocumentMoniker": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\aircraft.cs",
-              "RelativeDocumentMoniker": "opencv\\aircraft.cs",
-              "ToolTip": "C:\\Users\\chand\\source\\repos\\chandan18022002\\SysML\\opencv\\opencv\\aircraft.cs",
-              "RelativeToolTip": "opencv\\aircraft.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAtwBYAAAAFAAAA",
+              "DocumentIndex": 4,
+              "Title": "ewSensor.cs",
+              "DocumentMoniker": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\opencv\\ewSensor.cs",
+              "RelativeDocumentMoniker": "opencv\\ewSensor.cs",
+              "ToolTip": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\opencv\\ewSensor.cs",
+              "RelativeToolTip": "opencv\\ewSensor.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-14T08:10:18.42Z",
+              "WhenOpened": "2024-05-20T06:16:39.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "battleFrameWork.cs",
+              "DocumentMoniker": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\opencv\\battleFrameWork.cs",
+              "RelativeDocumentMoniker": "opencv\\battleFrameWork.cs",
+              "ToolTip": "C:\\Users\\chand\\Source\\Repos\\chandan18022002\\SysML\\opencv\\opencv\\battleFrameWork.cs",
+              "RelativeToolTip": "opencv\\battleFrameWork.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAuwBgAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T10:42:41.073Z",
               "EditorCaption": ""
             }
           ]

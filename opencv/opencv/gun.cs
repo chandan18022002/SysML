@@ -17,7 +17,7 @@ public class Guns : Wepons
     public string id;
     public double elivation;
     public double azimuth;
-    public Guns(int id, Platform platform, double Elivation, double Azimuth) : base(id, platform)
+    public Guns(int id, platform.Platform platform, double Elivation, double Azimuth) : base(id, platform)
     {
         this.Id = id;
         this.elivation = Elivation;
@@ -27,7 +27,7 @@ public class Guns : Wepons
 public class AAA : Guns
 {
     public double shell_fuses_delay;
-    public AAA(int id, Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
+    public AAA(int id, platform.Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
     {
         this.shell_fuses_delay = shell_fuses_delay;
     }
@@ -37,9 +37,9 @@ public class AAA : Guns
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 

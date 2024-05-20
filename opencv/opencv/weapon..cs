@@ -7,15 +7,15 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
-using battle_frame_work;
+using battleFrameWork;
 using platform;
 using generics;
 namespace weapon;
 
 public class Wepons : BattleSystem
 {
-    public Platform HostPlatform;
-    public Wepons(int id, Platform platform) : base(id)
+    public platform.Platform HostPlatform;
+    public Wepons(int id, platform.Platform platform) : base(id)
     {
         this.HostPlatform = platform;
     }
@@ -25,9 +25,9 @@ public class Wepons : BattleSystem
 
     public override List<Pair<string, string>> Get()
     {
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 

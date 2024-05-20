@@ -10,8 +10,6 @@ using weapon;
 using platform;
 using generics;
 namespace missile;
-
-
 public class Missiles : Wepons
 {
 
@@ -21,7 +19,7 @@ public class Missiles : Wepons
     public List<Waypoint> waypoints;
     public bool released;
     public Vector target_coordinates;
-    public Missiles(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates)
+    public Missiles(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates)
         : base(id, platform)
     {
         this.position = position;
@@ -37,9 +35,9 @@ public class Missiles : Wepons
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -61,11 +59,11 @@ public class Missiles : Wepons
         }
     }
 }
-public class Radar_guided : Missiles
+public class RadarGuided : Missiles
 {
 
 
-    public Radar_guided(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public RadarGuided(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -76,9 +74,9 @@ public class Radar_guided : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -88,10 +86,10 @@ public class Radar_guided : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Active_guider : Missiles
+public class ActiveGuider : Missiles
 {
     double onboard_radar;
-    public Active_guider(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public ActiveGuider(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard_radar = onboard_radar;
@@ -102,9 +100,9 @@ public class Active_guider : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -114,10 +112,10 @@ public class Active_guider : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Image_guidence : Missiles
+public class ImageGuidence : Missiles
 {
     double onboard__image_sensor;
-    public Image_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public ImageGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard__image_sensor = onboard_image_sensor;
@@ -128,9 +126,9 @@ public class Image_guidence : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
     public override void OnTick()
@@ -139,10 +137,10 @@ public class Image_guidence : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Gps_guidence : Missiles
+public class GpsGuidence : Missiles
 {
 
-    public Gps_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public GpsGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -153,9 +151,9 @@ public class Gps_guidence : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
     public override void OnTick()
@@ -164,10 +162,10 @@ public class Gps_guidence : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Semiacive_guidence : Missiles
+public class SemiaciveGuidence : Missiles
 {
     double onboard_receiver;
-    public Semiacive_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public SemiaciveGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard_receiver = onboard_receiver;
@@ -178,9 +176,9 @@ public class Semiacive_guidence : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
     public override void OnTick()
@@ -189,10 +187,10 @@ public class Semiacive_guidence : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Passive_guidence : Missiles
+public class PassiveGuidence : Missiles
 {
 
-    public Passive_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public PassiveGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -202,9 +200,9 @@ public class Passive_guidence : Missiles
     }
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -214,10 +212,10 @@ public class Passive_guidence : Missiles
         Console.WriteLine("radar guided is performing OnTick operation");
     }
 }
-public class Terrian_following_guidence : Missiles
+public class TerrianFollowingGuidence : Missiles
 {
 
-    public Terrian_following_guidence(int id, Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public TerrianFollowingGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -229,9 +227,9 @@ public class Terrian_following_guidence : Missiles
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 

@@ -14,7 +14,7 @@
 //using pulse;
 ////using radar;         // here im using radar namespace of other ( claseses) file 
 
-class main_class
+class MainClass
 {
     static void Main(string[] args)
     {

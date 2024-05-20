@@ -7,7 +7,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
-using ew_sensor;
+using ewSensor;
 using platform;
 using sensor;
 using missile;
@@ -37,7 +37,7 @@ public class Radar : Sensor
     public Dictionary<double, double[]> Gain_table;
     public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
-    public Radar(int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
+    public Radar(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)
     {
 
@@ -108,7 +108,7 @@ public class Radar : Sensor
     }
 }
 
-public class Pulsed_radar : Radar
+public class PulsedRadar : Radar
 {
 
     public int Pri; // Pulse Repetition Interval
@@ -116,7 +116,7 @@ public class Pulsed_radar : Radar
     public double prf;
     public double peak_transmission_power;
 
-    public Pulsed_radar(int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range, double peak_transmission_power)
+    public PulsedRadar(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range, double peak_transmission_power)
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
 
     {
@@ -131,9 +131,9 @@ public class Pulsed_radar : Radar
     }
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -144,11 +144,11 @@ public class Pulsed_radar : Radar
     }
 
 }
-public class Continous_wave : Radar
+public class ContinousWave : Radar
 {
     public double TransmittedFrequency;
     public double ReceivedFrequency;
-    public Continous_wave(int id, Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
+    public ContinousWave(int id, platform.Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
           : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
         this.TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
@@ -159,9 +159,9 @@ public class Continous_wave : Radar
     }
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -173,10 +173,10 @@ public class Continous_wave : Radar
 
 }
 
-public class Pulse_Doppler : Radar
+public class PulseDoppler : Radar
 {
 
-    public Pulse_Doppler(int id, Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range) /*List<List<double>> Gain_table*/
+    public PulseDoppler(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range) /*List<List<double>> Gain_table*/
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
 
@@ -186,9 +186,9 @@ public class Pulse_Doppler : Radar
     }
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 

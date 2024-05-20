@@ -8,7 +8,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
-using battle_frame_work;
+using battleFrameWork;
 using sensor;
 using generics;
 namespace platform;
@@ -81,9 +81,9 @@ public class Platform : BattleSystem
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
 
@@ -127,9 +127,9 @@ public class RadarBase : Platform
 
     public override List<Pair<string, string>> Get()
     {
-        Pair<string, string> tmp_pair = new Pair<string, string>("", "");
-        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>();
-        tmp_list.Add(tmp_pair);
+        List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
+            new Pair<string, string>("", ""),
+        };
         return tmp_list;//this.position;
     }
     public RadarBase(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor)

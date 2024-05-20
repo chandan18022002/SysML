@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radar_functionality", "sub_project\radar_functionality.csproj", "{ED204DA1-D784-45DB-BEB6-E6F037C33A9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radarFunctionality", "sub_project\radarFunctionality.csproj", "{ED204DA1-D784-45DB-BEB6-E6F037C33A9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radar_missile_guided", "sub_project_1\radar_missile_guided.csproj", "{3D130338-7677-4517-9E0F-B8BEE00BDFD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "radarGuidedMissile", "sub_project_1\radarGuidedMissile.csproj", "{3D130338-7677-4517-9E0F-B8BEE00BDFD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

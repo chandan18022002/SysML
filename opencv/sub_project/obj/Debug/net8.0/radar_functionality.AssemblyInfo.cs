@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("radar_functionality")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3417a30ec35eca813f45ae4f507110f340de900b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+558373ae86430eb5c3ed4d4f86a84dc0427e0b33")]
 [assembly: System.Reflection.AssemblyProductAttribute("radar_functionality")]
 [assembly: System.Reflection.AssemblyTitleAttribute("radar_functionality")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

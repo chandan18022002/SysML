@@ -9,41 +9,39 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Emgu.CV.Dnn;
 using platform;
 using generics;
-namespace battle_frame_work;
+namespace battleFrameWork;
 
 public abstract class BattleSystem
 {
 
+    public int Id;
     public BattleSystem(int id)
     {
         this.Id = id;
     }
-    public int Id;
     public abstract void Set(List<Pair<string, string>> param);
     public abstract List<Pair<string,string>> Get();
-
     // Abstract method for OnTick
     public abstract void OnTick();
 }
 
-public class Data_analyser
+public class DataAnalyser
 {
 
 }
 
-public class Battle_simulation_engine
+public class BattleSimulationEngine
 {
-    public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
-    public void register(BattleSystem battle_system)
+    public void Register(BattleSystem battleSystem)
     {
 
     }
-    public void unregister(BattleSystem battle_system)
+    public void Unregister(BattleSystem battleSystem)
     { 
 
     }
-    public void run_scinario(BattleSystem battle_system)
+    public void RunScinario(BattleSystem battleSystem)
     {
 
     }
@@ -51,6 +49,6 @@ public class Battle_simulation_engine
 }
 public class Scinario
 {
-    BattleSystem battle_system;
-    double sequence_steps;
+    BattleSystem BattleSystem;
+    double SequenceSteps;
 }
