@@ -23,7 +23,7 @@ public class Platform : BattleSystem
     public List<Sensor> onboardSensor;
     public Dictionary<double, double[]> RadarCrossSection;
 
-    public Platform(int id, double speed, double heading, List<Vector> waypoints, List<Sensor> OnBoardsensor)
+    public Platform(string id, double speed, double heading, List<Vector> waypoints, List<Sensor> OnBoardsensor)
         : base(id)
     {
         this.speed = speed;
@@ -94,28 +94,6 @@ public class Platform : BattleSystem
     }
 }
 
-public class Vector
-{
-    public double X;
-    public double Y;
-    public Vector(double x, double y)
-    {
-        this.X = x;
-        this.Y = y;
-    }
-}
-
-public class Waypoint
-{
-    public int Location;
-
-    public Waypoint() { }
-
-    public Waypoint(int location)
-    {
-        this.Location = location;
-    }
-}
 public class RadarBase : Platform
 {
     public string id;
@@ -128,11 +106,12 @@ public class RadarBase : Platform
     public override List<Pair<string, string>> Get()
     {
         List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
-            new Pair<string, string>("", ""),
+            new Pair<string, string>("Position_x", this.position.X.ToString()),
+            new Pair<string, string>("Position_y", this.position.Y.ToString()),
         };
         return tmp_list;//this.position;
     }
-    public RadarBase(int id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor)
+    public RadarBase(string id, double Speed, double Heading, List<Vector> Waypoints, List<Sensor> OnboardSensor)
         : base(id, Speed, Heading, Waypoints, OnboardSensor)
     {
 

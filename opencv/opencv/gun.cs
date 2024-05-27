@@ -17,7 +17,7 @@ public class Guns : Wepons
     public string id;
     public double elivation;
     public double azimuth;
-    public Guns(int id, platform.Platform platform, double Elivation, double Azimuth) : base(id, platform)
+    public Guns(string id, platform.Platform platform, double Elivation, double Azimuth) : base(id, platform)
     {
         this.Id = id;
         this.elivation = Elivation;
@@ -27,7 +27,7 @@ public class Guns : Wepons
 public class AAA : Guns
 {
     public double shell_fuses_delay;
-    public AAA(int id, platform.Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
+    public AAA(string id, platform.Platform platform, double shell_fuses_delay, double Elivation, double Azimuth) : base(id, platform, Elivation, Azimuth)
     {
         this.shell_fuses_delay = shell_fuses_delay;
     }

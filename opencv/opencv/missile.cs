@@ -16,10 +16,10 @@ public class Missiles : Wepons
     public Vector position;
     public double speed;
     public double heading;
-    public List<Waypoint> waypoints;
+    public List<Vector> waypoints;
     public bool released;
     public Vector target_coordinates;
-    public Missiles(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates)
+    public Missiles(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, bool released, Vector target_coardinates)
         : base(id, platform)
     {
         this.position = position;
@@ -63,7 +63,7 @@ public class RadarGuided : Missiles
 {
 
 
-    public RadarGuided(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public RadarGuided(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -89,7 +89,7 @@ public class RadarGuided : Missiles
 public class ActiveGuider : Missiles
 {
     double onboard_radar;
-    public ActiveGuider(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_radar, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public ActiveGuider(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, double onboard_radar, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard_radar = onboard_radar;
@@ -115,7 +115,7 @@ public class ActiveGuider : Missiles
 public class ImageGuidence : Missiles
 {
     double onboard__image_sensor;
-    public ImageGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_image_sensor, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public ImageGuidence(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, double onboard_image_sensor, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard__image_sensor = onboard_image_sensor;
@@ -140,7 +140,7 @@ public class ImageGuidence : Missiles
 public class GpsGuidence : Missiles
 {
 
-    public GpsGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public GpsGuidence(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -165,7 +165,7 @@ public class GpsGuidence : Missiles
 public class SemiaciveGuidence : Missiles
 {
     double onboard_receiver;
-    public SemiaciveGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, double onboard_receiver, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public SemiaciveGuidence(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, double onboard_receiver, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
         this.onboard_receiver = onboard_receiver;
@@ -190,7 +190,7 @@ public class SemiaciveGuidence : Missiles
 public class PassiveGuidence : Missiles
 {
 
-    public PassiveGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public PassiveGuidence(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 
@@ -214,8 +214,7 @@ public class PassiveGuidence : Missiles
 }
 public class TerrianFollowingGuidence : Missiles
 {
-
-    public TerrianFollowingGuidence(int id, platform.Platform platform, Vector position, double speed, double heading, List<Waypoint> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
+    public TerrianFollowingGuidence(string id, platform.Platform platform, Vector position, double speed, double heading, List<Vector> waypoints, bool released, Vector target_coardinates) : base(id, platform, position, speed, heading, waypoints, released, target_coardinates)
 
     {
 

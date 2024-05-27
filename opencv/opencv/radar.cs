@@ -37,7 +37,7 @@ public class Radar : Sensor
     public Dictionary<double, double[]> Gain_table;
     public List<(double x, double y, int tick)> latest_five_target_coordinates { get; private set; }
 
-    public Radar(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
+    public Radar(string id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resenution_cell, double minimum_range, double max_unamb_range/*, List<List<double>> gain_table*/)
         : base(id, platform)
     {
 
@@ -113,28 +113,27 @@ public class PulsedRadar : Radar
 
     public int Pri; // Pulse Repetition Interval
     public double Pwd;
-    public double prf;
     public double peak_transmission_power;
 
-    public PulsedRadar(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range, double peak_transmission_power)
+    public PulsedRadar(string id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range, double peak_transmission_power)
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
 
     {
         this.Pri = pri; // Pulse Repetition Interval
         this.Pwd = pwd;
-        this.prf = prf;
         this.peak_transmission_power = peak_transmission_power;
 
-    }
-    public override void Set(List<Pair<string, string>> param)
-    {
     }
     public override List<Pair<string, string>> Get()
     {
         List<Pair<string, string>> tmp_list = new List<Pair<string, string>>() {
-            new Pair<string, string>("", ""),
+            new Pair<string, string>("Position_x", this.hostPlatform.position.X.ToString()),
+            new Pair<string, string>("Position_y", this.hostPlatform.position.Y.ToString()),
         };
         return tmp_list;//this.position;
+    }
+    public override void Set(List<Pair<string, string>> param)
+    {
     }
 
     public override void OnTick()
@@ -148,7 +147,7 @@ public class ContinousWave : Radar
 {
     public double TransmittedFrequency;
     public double ReceivedFrequency;
-    public ContinousWave(int id, platform.Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
+    public ContinousWave(string id, platform.Platform platform, double transmitted_frequency, double received_frequency, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range)
           : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
         this.TransmittedFrequency = transmitted_frequency; // Initialize Transmitted Frequency
@@ -176,7 +175,7 @@ public class ContinousWave : Radar
 public class PulseDoppler : Radar
 {
 
-    public PulseDoppler(int id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range) /*List<List<double>> Gain_table*/
+    public PulseDoppler(string id, platform.Platform platform, string operatingMode, string antenna, string modulation, double elevation, double azimuth, double frequency, int pri, double pwd, string antennaScanPattern, double detection_range, double detectability_range, double resolution_cell, double minimum_range, double max_unamb_range) /*List<List<double>> Gain_table*/
         : base(id, platform, operatingMode, antenna, modulation, elevation, azimuth, frequency, pri, pwd, antennaScanPattern, detection_range, detectability_range, resolution_cell, minimum_range, max_unamb_range)
     {
 

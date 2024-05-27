@@ -27,7 +27,7 @@ public class Aircraft : Platform
         };
         return tmp_list;//this.position;
     }
-    public Aircraft(int id, double speed, double heading, List<Vector> waypoints, List<Sensor> onboardSensor /*,double radar_cross_section*/)
+    public Aircraft(string id, double speed, double heading, List<Vector> waypoints, List<Sensor> onboardSensor /*,double radar_cross_section*/)
         : base(id, speed, heading, waypoints, onboardSensor)
     {
 

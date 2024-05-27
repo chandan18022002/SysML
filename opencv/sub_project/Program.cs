@@ -5,7 +5,7 @@ using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-
+using generics;
 using platform;
 using aircraft;
 using radar;
@@ -25,16 +25,16 @@ class MainClass
         Dictionary<int, Pulse> pulse_dictionary = new Dictionary<int, Pulse>();
         // RADAR BASE class initialsization
 
-        RadarBase radarbase = new RadarBase(0, 0, 0, [new Vector(100, 300)], []);
+        RadarBase radarbase = new RadarBase("rb1", 0, 0, [new Vector(100, 300)], []);
         radarbaselist.Add(radarbase);
 
         //radAR  class initialsization
-        PulsedRadar pulse_radar = new PulsedRadar(0, radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
+        PulsedRadar pulse_radar = new PulsedRadar("pr1", radarbase, "operating_mode", "antenna_type", "none", 0, 0, 1.5, 300, 1.5, "antenna_scan_pattern", 100, 200, 1, 1, 100, 10);
         radarbase.onboardSensor.Add(pulse_radar);// assigning the onboardsensor to a radar
         pulse_radar_list.Add(pulse_radar);
 
         //aircraft class initialsization
-        Aircraft aircraft = new Aircraft(0, .01, 1, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
+        Aircraft aircraft = new Aircraft("a0", .01, 1, [new Vector(500, 300), new Vector(500, 500), new Vector(500, 100)], []);
         aircraftlist.Add(aircraft);                      //here set aircraft pos as same as radar pos bz max unamb range is =500 so that aircraft pos is radarpos+unamgious rangee
 
 
@@ -69,6 +69,7 @@ class MainClass
             //Aircraft visualize, move and pulse.collide
             for (int i = aircraftlist.Count - 1; i >= 0; i--)
             {
+                //target collide
                 Bgr actual_pixelValue = GetPixelBgr(image_actual, (int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y);
                 if (actual_pixelValue.Red == 255)
                 {
@@ -80,8 +81,8 @@ class MainClass
                         pulse.Collided_Target(aircraftlist[i]);
                     }
                 }
-                //Green Aircraft
                 aircraftlist[i].MovePlatform();
+                //Green Aircraft Visualize
                 CvInvoke.PutText(image_visual, Math.Round(aircraftlist[i].position.X, 2).ToString() + "," + Math.Round(aircraftlist[i].position.Y, 2).ToString(), new Point((int)aircraftlist[i].position.X + 10, (int)aircraftlist[i].position.Y + 10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
                 CvInvoke.Circle(image_visual, new Point((int)aircraftlist[i].position.X, (int)aircraftlist[i].position.Y), 3, new MCvScalar(0, 255, 0), -1);
             }
@@ -92,7 +93,7 @@ class MainClass
             {
                 RadarBase current_radarbase = ((RadarBase)(pulse_radar_list[i].hostPlatform));
                 Bgr actual_pixelValue_0 = GetPixelBgr(image_actual, (int)current_radarbase.position.X, (int)current_radarbase.position.Y);
-
+                //radar collide
                 if (actual_pixelValue_0.Red == 255)
                 {
 
@@ -107,13 +108,8 @@ class MainClass
                     }
                     pulse_dictionary.Remove(i);
                 }
-                //RadarBase current_radar__base = pulse_radar_list[i];
-                //current radar base is onboard sensor in pulse_radar_list[i]
-                // Use current radar base position for circle
-                // CvInvoke.Circle(image_actual, new Point((int)current_radarbase.position.X, (int)current_radarbase.position.Y), 3, new MCvScalar(255, 0, 0), -1);
-                // use pulse_radar_list[i] instead of pulse_radar
+                // transmit
                 if (tick % pulse_radar_list[i].pri == 0)
-                //if (tick == 0)
                 {
                     //Pulse position should be equal to radar base
                     //create a pulse
@@ -123,17 +119,8 @@ class MainClass
                     double vel_y = temp_velocity * Math.Sin(DegreesToRadians((pulse_radar_list[i].azimuth)));
 
 
-                    //creating pulse                                                                                                                          
-
-                    // Pulse pulse = new Pulse(current_pulse_id, new Vector(radarbaselist[i].position.X, radarbaselist[i].position.Y), new Vector(vel_x, vel_y),
-                    //  ( pulse_radar.peak_transmission_power *(int)pulse_radar.Gain_table[pulse_radar.frequency][0]), pulse_radar, pulse_radar.Pwd, pulse_radar.frequency, 0.0, 0.01, 0.0, 0.0, pulse_radar.azimuth);
-                    //pulse position should be rdar position so it achieve by .x and .y individually 
-                    // pulse_radar.frequency convert to index
-
-
-                    double power = pulse_radar_list[i].peak_transmission_power * pulse_radar_list[i].Gain_table[pulse_radar_list[i].frequency][0];     //36 beacause it is index value of 18.5 frequency
-                    //int powerInt = (int)power; // Convert double to int, truncating any fractional part
-
+                    //transmitting and creating pulse
+                    double power = pulse_radar_list[i].peak_transmission_power * pulse_radar_list[i].Gain_table[pulse_radar_list[i].frequency][0];
                     Pulse pulse = new Pulse(
                         current_pulse_id,
                         new Vector((int)current_radarbase.position.X, (int)current_radarbase.position.Y),
@@ -163,8 +150,7 @@ class MainClass
                         current_pulse_id = 0;
                     }
                 }
-                //RADAR
-                //CvInvoke.PutText(image_visual, Math.Round(pulse_radar_list[i].azimuth,2).ToString(), new Point((int)radarbaselist[i].position.X+10, (int)radarbaselist[i].position.Y+10), FontFace.HersheySimplex, 1.0, new MCvScalar(255, 255, 255), 2);
+                //RADAR Visualize
                 CvInvoke.Circle(image_visual, new Point((int)radarbaselist[i].position.X, (int)radarbaselist[i].position.Y), 3, new MCvScalar(255, 0, 0), -1);
             }
 

@@ -10,6 +10,7 @@ using platform;
 using radar;
 using missile;
 using aircraft;
+using generics;
 namespace pulse;
 
 public class Pulse

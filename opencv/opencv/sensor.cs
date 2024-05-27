@@ -14,7 +14,7 @@ namespace sensor;
 public class Sensor : BattleSystem
 {
     public Platform hostPlatform;
-    public Sensor(int id, Platform platform) : base(id)
+    public Sensor(string id, Platform platform) : base(id)
     {
         this.hostPlatform = platform;
     }

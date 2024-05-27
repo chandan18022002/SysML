@@ -8,12 +8,23 @@ namespace generics
 {
     public class Pair<T1,T2>
     {
-        T1 First;
-        T2 Second;
+        public T1 First;
+        public T2 Second;
         public Pair(T1 first, T2 second)
         {
             this.First = first;
             this.Second = second;
+        }
+    }
+
+    public class Vector
+    {
+        public double X;
+        public double Y;
+        public Vector(double x, double y)
+        {
+            this.X = x;
+            this.Y = y;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace weapon;
 public class Wepons : BattleSystem
 {
     public platform.Platform HostPlatform;
-    public Wepons(int id, platform.Platform platform) : base(id)
+    public Wepons(string id, platform.Platform platform) : base(id)
     {
         this.HostPlatform = platform;
     }

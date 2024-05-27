@@ -19,7 +19,7 @@ public class Esm : Sensor
     public double AntennaConfigaration;
     public double ReceptionBand;
 
-    public Esm(int id, platform.Platform platform, double noOfAntenna, double pwds, double emmiterRecords, double antennaConfigaration, double receptionBand)
+    public Esm(string id, platform.Platform platform, double noOfAntenna, double pwds, double emmiterRecords, double antennaConfigaration, double receptionBand)
          : base(id, platform)
     {
         this.NoOfAntenna = noOfAntenna;
@@ -49,7 +49,7 @@ public class Rwr : Sensor
     public double AntennaConfigaration;
     public double ReceptionBand;
 
-    public Rwr(int id, platform.Platform platform, double noOfAntenna, double pwds, double emmiterRecords, double antennaConfigaration, double receptionBand)
+    public Rwr(string id, platform.Platform platform, double noOfAntenna, double pwds, double emmiterRecords, double antennaConfigaration, double receptionBand)
          : base(id, platform)
     {
         this.NoOfAntenna = noOfAntenna;

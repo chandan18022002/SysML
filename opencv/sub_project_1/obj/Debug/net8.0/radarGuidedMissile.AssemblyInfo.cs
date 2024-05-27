@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("radarGuidedMissile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67e96aca9142a32f31cb24f904a5acc2a720e716")]
 [assembly: System.Reflection.AssemblyProductAttribute("radarGuidedMissile")]
 [assembly: System.Reflection.AssemblyTitleAttribute("radarGuidedMissile")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

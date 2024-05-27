@@ -14,8 +14,8 @@ namespace battleFrameWork;
 public abstract class BattleSystem
 {
 
-    public int Id;
-    public BattleSystem(int id)
+    public string Id;
+    public BattleSystem(string id)
     {
         this.Id = id;
     }
