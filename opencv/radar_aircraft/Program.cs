@@ -39,12 +39,6 @@ class MainClass
         AircraftList.Add(Aircraft1);
         BattleSystems.Add(Aircraft1);
         
-        //List<List<Pair<string, string>>> GlobalMatrix = new List<List<Pair<string, string>>>;
-        List<Pair<string, string>>[,] GlobalMatrix = new List<Pair<string, string>>[BattleSystems.Count, BattleSystems.Count];
-        int tick = 0;
-        while (true)
-        {
-            Dictionary<string, List<Pair<string, string>>> Awareness = new Dictionary<string, List<Pair<string, string>>>();
 
             Mat image = new Mat(800, 1000, Emgu.CV.CvEnum.DepthType.Cv8U, 3);
             image.SetTo(new Bgr(0, 0, 0).MCvScalar);
